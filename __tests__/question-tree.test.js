@@ -4,6 +4,11 @@ import { Node } from '../src/node';
 describe("QuestionTree", () => {
 
     let qTree = new QuestionTree();
+    let expectedResultTree = new QuestionTree();
+    let newQ;
+    let newA;
+    const NEW_YES = "yes";
+    const NEW_NO = "no";
 
     test("Creates an instance of QuestionTree", () => {
         expect(qTree).toBeInstanceOf(QuestionTree);
@@ -22,16 +27,40 @@ describe("QuestionTree", () => {
     });
 
     test("insertNewQA method should replace the root/old leaf node with a new question node, then the new root should have the old leaf and the new answer node as its children", () => {
-        const NEW_Q = "Is it an animal?";
-        const NEW_A = "kangaroo";
-        qTree.insertNewQA(NEW_Q, NEW_A);
+        newQ = "Is it an animal?";
+        newA = "kangaroo";
+        qTree.insertNewQA(newQ, NEW_YES, newA);
 
-        let expectedResultTree = new QuestionTree();
-        expectedResultTree.root = new Node("Is it an animal", null);
-        expectedResultTree.root.yes = new Node(null, "kangaroo");
+        expectedResultTree.root = new Node(newQ, null);
+        expectedResultTree.root.yes = new Node(null, newA);
         expectedResultTree.root.no = new Node(null, "computer");
 
         expect(qTree).toEqual(expectedResultTree);
+    });
+
+    test("insertNewQA method should continue to modify the tree appropriately", () => {
+        newQ = "Does it move slowly?";
+        newA = "sloth";
+        qTree.insertNewQA(newQ, NEW_YES, newA);
+
+        expectedResultTree.root.yes = new Node(newQ, null);
+        expectedResultTree.root.yes.yes = new Node(null, newA);
+        expectedResultTree.root.yes.no = new Node(null, "kangaroo");
+
+        expect(qTree).toEqual(expectedResultTree);
+    });
+
+    test("insertNewQA method should continue to modify the tree appropriately", () => {
+        newQ = "Does it jump skillfully?";
+        newA = "cheetah";
+        qTree.insertNewQA(newQ, NEW_NO, newA);
+
+        expectedResultTree.root.yes = new Node(newQ, null);
+        expectedResultTree.root.yes.yes = new Node(null, "kangaroo");
+        expectedResultTree.root.yes.no = new Node(null, newA);
+
+        expect(qTree).toEqual(expectedResultTree);
+        
     });
 
 
