@@ -130,14 +130,14 @@ describe("QuestionTree", () => {
             let nodeToPop = testTree.root.yes.no;
             testTree.pop(nodeToPop)
     
-            let expectedResult = new QuestionTree();
-            expectedResult.root = new Node("Is it an animal?", null);
-            expectedResult.root.yes = new Node("Does it move slowly?", null);
-            expectedResult.root.no = new Node(null, "computer");
-            expectedResult.root.yes.yes = new Node(null, "sloth");
-            expectedResult.root.yes.no = null;
+            let expectedTree = new QuestionTree();
+            expectedTree.root = new Node("Is it an animal?", null);
+            expectedTree.root.yes = new Node("Does it move slowly?", null);
+            expectedTree.root.no = new Node(null, "computer");
+            expectedTree.root.yes.yes = new Node(null, "sloth");
+            expectedTree.root.yes.no = null;
             
-            expect(testTree).toEqual(expectedResult);
+            expect(testTree).toEqual(expectedTree);
         });
     });
      

@@ -46,23 +46,21 @@ export class QuestionTree {
         }
 
         // traverse the tree, starting from the root
-        let currentNode = this.root;
-        
+        let currentNode = this.root;        
         function traverse(currentNode) {
-            if (currentNode.yes == nodeToPop || currentNode.no == nodeToPop) return currentNode;
+            if (currentNode.yes == nodeToPop) {
+                currentNode.yes = null;
+                return currentNode;
+            } else if (currentNode.no == nodeToPop) {
+                currentNode.no = null;
+                return currentNode;
+            }
             if (!currentNode.yes && !currentNode.no) return;
             if (currentNode.yes) traverse(currentNode.yes);
             if (currentNode.no) traverse(currentNode.no);
         }
 
-        currentNode = traverse(currentNode);
-        // console.log(currentNode);
-        if (currentNode && currentNode.yes.answer === nodeToPop.answer) {
-            currentNode.yes = null;
-        } else if (currentNode && currentNode.no.answer === nodeToPop.answer) {
-            currentNode.no = null;
-        }
-        
+        traverse(currentNode);        
         return nodeToPop;
     }
 
