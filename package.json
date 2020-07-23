@@ -1,8 +1,8 @@
 {
-  "name": "template",
+  "name": "twenty-questions",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "An application that implements a yes/no guessing game called 20 Questions.",
+  "main": "main.js",
   "scripts": {
     "build": "webpack --mode development",
     "start": "npm run build; webpack-dev-server --open --mode development",
