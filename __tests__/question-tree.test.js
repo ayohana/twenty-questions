@@ -9,6 +9,10 @@ describe("QuestionTree", () => {
         expect(qTree).toBeInstanceOf(QuestionTree);
     });
 
+    test("Property of new QuestionTree instance should be a Node object", () => {
+        expect(qTree.root).toBeInstanceOf(Node);
+    });
+
     test("New QuestionTree instance should store null as its root's question value", () => {
         expect(qTree.root.question).toBeNull();
     });
