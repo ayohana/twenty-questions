@@ -2,7 +2,7 @@
 
 # [Twenty Questions](https://github.com/ayohana/twenty-questions.git)
 
-#### Binary Trees Exercise in JavaScript/React, 07.22.20 - present
+#### Binary Trees Exercise in JavaScript, 07.22.2020 - 07.23.2020
 
 #### By [**Adela Darmansyah**](https://github.com/ayohana/)
 
@@ -29,6 +29,8 @@ No known bugs at this time.
 
 * JavaScript
 * Markdown
+* [Jest](https://jestjs.io/docs/en/api)
+* [Visual Studio Code](https://code.visualstudio.com/)
 
 ## Learning Resources
 
