@@ -35,11 +35,38 @@ export class QuestionTree {
         // }        
     }
 
+    // Assume node will always be a leaf
+    // Returns node to be removed and modifies the tree
     pop(nodeToPop) {
-        // pop method should modify the tree and returns the popped leaf node
+        // check if there is a root
+        if (!nodeToPop || !this.root) return null;
+        if (this.root == nodeToPop) {
+            this.root = null;
+            return nodeToPop;
+        }
+
+        // traverse the tree, starting from the root
+        let currentNode = this.root;
+        
+        function traverse(currentNode) {
+            if (currentNode.yes == nodeToPop || currentNode.no == nodeToPop) return currentNode;
+            if (!currentNode.yes && !currentNode.no) return;
+            if (currentNode.yes) traverse(currentNode.yes);
+            if (currentNode.no) traverse(currentNode.no);
+        }
+
+        currentNode = traverse(currentNode);
+        // console.log(currentNode);
+        if (currentNode && currentNode.yes.answer === nodeToPop.answer) {
+            currentNode.yes = null;
+        } else if (currentNode && currentNode.no.answer === nodeToPop.answer) {
+            currentNode.no = null;
+        }
+        
         return nodeToPop;
     }
 
+    // Returns true if user inputs a yes, otherwise false
     isYes(yesOrNo) {
         let yesses = ["yes", "y"];
         return yesses.includes(yesOrNo.toLowerCase()) ? true : false;

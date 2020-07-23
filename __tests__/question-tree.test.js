@@ -8,8 +8,8 @@ describe("QuestionTree", () => {
     let newQ;
     let newA;
     let currentNode;
-    const NEW_YES = "Yes";
-    const NEW_NO = "No";
+    const YES = "Yes";
+    const NO = "No";
 
     test("Creates an instance of QuestionTree", () => {
         expect(qTree).toBeInstanceOf(QuestionTree);
@@ -31,7 +31,7 @@ describe("QuestionTree", () => {
     //     currentNode = qTree.root;
     //     newQ = "Is it an animal?";
     //     newA = "kangaroo";
-    //     qTree.insertNewQA(currentNode, newQ, NEW_YES, newA);
+    //     qTree.insertNewQA(currentNode, newQ, YES, newA);
 
     //     expectedResultTree.root = new Node(newQ, null);
     //     expectedResultTree.root.yes = new Node(null, newA);
@@ -44,7 +44,7 @@ describe("QuestionTree", () => {
     //     currentNode = qTree.root.yes;
     //     newQ = "Does it move slowly?";
     //     newA = "sloth";
-    //     qTree.insertNewQA(currentNode, newQ, NEW_YES, newA);
+    //     qTree.insertNewQA(currentNode, newQ, YES, newA);
 
     //     expectedResultTree.root.yes = new Node(newQ, null);
     //     expectedResultTree.root.yes.yes = new Node(null, newA);
@@ -57,7 +57,7 @@ describe("QuestionTree", () => {
     //     currentNode = qTree.root.yes.no;
     //     newQ = "Does it jump skillfully?";
     //     newA = "cheetah";
-    //     qTree.insertNewQA(currentNode, newQ, NEW_NO, newA);
+    //     qTree.insertNewQA(currentNode, newQ, NO, newA);
 
     //     expectedResultTree.root.yes.no = new Node(newQ, null);
     //     expectedResultTree.root.yes.no.no = new Node(null, newA);
@@ -67,21 +67,80 @@ describe("QuestionTree", () => {
 
     // });
 
-    test("isYes method should return true for yesses", () => {
-        expect(qTree.isYes(NEW_YES)).toEqual(true);
-    })
 
-    test("isYes method should return false for nos", () => {
-        expect(qTree.isYes(NEW_NO)).toEqual(false);
-    })
 
-    test("pop method should modify the tree and returns the popped leaf node", () => {
-        let testTree = new QuestionTree();
-        let nodeToPop = new Node(null, "popthisnode");
-        testTree.root.yes = nodeToPop;
 
-        expect(testTree.pop(nodeToPop)).toEqual(nodeToPop);
-    })
+    // IS YES METHOD ========================================
+    describe("ISYES METHOD", () => {
+        test("isYes method should return true for yesses", () => {
+            expect(qTree.isYes(YES)).toEqual(true);
+        });
+    
+        test("isYes method should return false for nos", () => {
+            expect(qTree.isYes(NO)).toEqual(false);
+        });
+    });
+
+
+
+
+    // POP LEAF NODES =======================================
+    describe("POP METHOD", () => {
+        let testTree;
+
+        beforeEach(() => {
+            testTree = new QuestionTree();
+        });
+    
+        test("When pop method is used on a tree that only consists a root node, it should return the root and leave the root property as null", () => {
+            let expectedResult = new Node(null, "computer");
+    
+            expect(testTree.pop(testTree.root)).toEqual(expectedResult);
+            expect(testTree.root).toBeNull();
+        });
+    
+        test("When the tree is empty, the pop method should return null", () => {
+            testTree.pop(testTree.root);
+    
+            let nodeToPop = new Node(null, "computer");
+    
+            expect(testTree.pop(nodeToPop)).toBeNull();
+        });
+    
+        test("If no parameter is passed into the pop method, it should return null", () => {
+            expect(testTree.pop()).toBeNull();
+        });
+    
+        test("Given a nodeToPop object as a parameter, the pop method should return the nodeToPop object", () => {
+            testTree.root = new Node("Is it an animal?", null);
+            testTree.root.yes = new Node(null, "kangaroo");
+            testTree.root.no = new Node(null, "computer");
+            let nodeToPop = testTree.root.yes;
+    
+            let expectedResult = new Node(null, "kangaroo");
+            expect(testTree.pop(nodeToPop)).toEqual(expectedResult);
+        });
+
+        test("Popping a node out should modify the tree correctly", () => {
+            testTree.root = new Node("Is it an animal?", null);
+            testTree.root.yes = new Node("Does it move slowly?", null);
+            testTree.root.no = new Node(null, "computer");
+            testTree.root.yes.yes = new Node(null, "sloth");
+            testTree.root.yes.no = new Node(null, "kangaroo");
+            let nodeToPop = testTree.root.yes.no;
+            testTree.pop(nodeToPop)
+    
+            let expectedResult = new QuestionTree();
+            expectedResult.root = new Node("Is it an animal?", null);
+            expectedResult.root.yes = new Node("Does it move slowly?", null);
+            expectedResult.root.no = new Node(null, "computer");
+            expectedResult.root.yes.yes = new Node(null, "sloth");
+            expectedResult.root.yes.no = null;
+            
+            expect(testTree).toEqual(expectedResult);
+        });
+    });
+     
 
 
 });
