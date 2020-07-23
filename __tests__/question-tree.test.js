@@ -27,47 +27,67 @@ describe("QuestionTree", () => {
         expect(qTree.root.answer).toEqual("computer");
     });
 
-    // test("insertNewQA method should replace the root/old leaf node with a new question node, then the new root should have the old leaf and the new answer node as its children", () => {
-    //     currentNode = qTree.root;
-    //     newQ = "Is it an animal?";
-    //     newA = "kangaroo";
-    //     qTree.insertNewQA(currentNode, newQ, YES, newA);
-
-    //     expectedResultTree.root = new Node(newQ, null);
-    //     expectedResultTree.root.yes = new Node(null, newA);
-    //     expectedResultTree.root.no = new Node(null, "computer");
-
-    //     expect(qTree).toEqual(expectedResultTree);
-    // });
-
-    // test("insertNewQA method should continue to modify the tree appropriately", () => {
-    //     currentNode = qTree.root.yes;
-    //     newQ = "Does it move slowly?";
-    //     newA = "sloth";
-    //     qTree.insertNewQA(currentNode, newQ, YES, newA);
-
-    //     expectedResultTree.root.yes = new Node(newQ, null);
-    //     expectedResultTree.root.yes.yes = new Node(null, newA);
-    //     expectedResultTree.root.yes.no = new Node(null, "kangaroo");
-
-    //     expect(qTree).toEqual(expectedResultTree);
-    // });
-
-    // test("insertNewQA method should continue to modify the tree appropriately", () => {
-    //     currentNode = qTree.root.yes.no;
-    //     newQ = "Does it jump skillfully?";
-    //     newA = "cheetah";
-    //     qTree.insertNewQA(currentNode, newQ, NO, newA);
-
-    //     expectedResultTree.root.yes.no = new Node(newQ, null);
-    //     expectedResultTree.root.yes.no.no = new Node(null, newA);
-    //     expectedResultTree.root.yes.no.yes = new Node(null, "kangaroo");
-        
-    //     expect(qTree).toEqual(expectedResultTree);
-
-    // });
+    
 
 
+    // INSERT NEW Q&A METHOD ===============================
+    describe("INSERT NEW Q&A", () => {
+        test("insertNewQA method on a new tree should replace the root with a new Question node, the new root will have new children: the new Answer node and the old root", () => {
+            currentNode = qTree.root;
+            newQ = "Is it an animal?";
+            newA = "kangaroo";
+            qTree.insertNewQA(currentNode, newQ, YES, newA);
+
+            expectedResultTree.root = new Node(newQ, null);
+            expectedResultTree.root.yes = new Node(null, newA);
+            expectedResultTree.root.no = new Node(null, "computer");
+            
+            expect(qTree.root).toEqual(expectedResultTree.root);
+        });
+
+        // test("insertNewQA method should replace the root/old leaf node with a new question node, then the new root should have the old leaf and the new answer node as its children", () => {
+        //     currentNode = qTree.root;
+        //     newQ = "Is it an animal?";
+        //     newA = "kangaroo";
+        //     qTree.insertNewQA(currentNode, newQ, YES, newA);
+
+        //     expectedResultTree.root = new Node(newQ, null);
+        //     expectedResultTree.root.yes = new Node(null, newA);
+        //     expectedResultTree.root.no = new Node(null, "computer");
+
+        //     expect(qTree).toEqual(expectedResultTree);
+        // });
+
+        // test("insertNewQA method should continue to modify the tree appropriately", () => {
+        //     currentNode = qTree.root.yes;
+        //     newQ = "Does it move slowly?";
+        //     newA = "sloth";
+        //     qTree.insertNewQA(currentNode, newQ, YES, newA);
+
+        //     expectedResultTree.root.yes = new Node(newQ, null);
+        //     expectedResultTree.root.yes.yes = new Node(null, newA);
+        //     expectedResultTree.root.yes.no = new Node(null, "kangaroo");
+
+        //     expect(qTree).toEqual(expectedResultTree);
+        // });
+
+        // test("insertNewQA method should continue to modify the tree appropriately", () => {
+        //     currentNode = qTree.root.yes.no;
+        //     newQ = "Does it jump skillfully?";
+        //     newA = "cheetah";
+        //     qTree.insertNewQA(currentNode, newQ, NO, newA);
+
+        //     expectedResultTree.root.yes.no = new Node(newQ, null);
+        //     expectedResultTree.root.yes.no.no = new Node(null, newA);
+        //     expectedResultTree.root.yes.no.yes = new Node(null, "kangaroo");
+            
+        //     expect(qTree).toEqual(expectedResultTree);
+
+        // });
+
+    });
+
+   
 
 
     // IS YES METHOD ========================================

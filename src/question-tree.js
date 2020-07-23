@@ -5,22 +5,26 @@ export class QuestionTree {
         this.root = new Node(null, "computer")
     }
 
-    // insertNewQA method should replace the root/old leaf node with a new question node, then the new root should have the old leaf and the new answer node as its children
+    // Inserts two new nodes correctly into the tree
     insertNewQA(currentNode, newQ, yesOrNo, newA) {
         let newQuestionNode = new Node(newQ, null);
         let newAnswerNode = new Node(null, newA);
-        let oldNode = new Node(null, currentNode.answer);
 
-        if (this.isYes(yesOrNo)) {
-            newQuestionNode.yes = newAnswerNode;
-            newQuestionNode.no = oldNode;
-        } else {
-            newQuestionNode.no = newAnswerNode;
-            newQuestionNode.yes = oldNode;
+        // Check if there is a root
+        if (!this.root) return;
+        if (this.root == currentNode) {
+            this.root = newQuestionNode;
+            if (this.isYes(yesOrNo)) {
+                this.root.yes = newAnswerNode;
+                this.root.no = currentNode;
+            } else {
+                this.root.no = newAnswerNode;
+                this.root.yes = currentNode;
+            }
+            return;
         }
 
-        currentNode = newQuestionNode;
-
+        
         // let newQuestionNode = new Node(newQ, null);
         // let newAnswerNode = new Node(null, newA);
         // let oldNode = currentNode;
@@ -38,14 +42,14 @@ export class QuestionTree {
     // Assume node will always be a leaf
     // Returns node to be removed and modifies the tree
     pop(nodeToPop) {
-        // check if there is a root
+        // Check if there is a root
         if (!nodeToPop || !this.root) return null;
         if (this.root == nodeToPop) {
             this.root = null;
             return nodeToPop;
         }
 
-        // traverse the tree, starting from the root
+        // Traverse the tree, starting from the root
         let currentNode = this.root;        
         function traverse(currentNode) {
             if (currentNode.yes == nodeToPop) {
