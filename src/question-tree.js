@@ -6,37 +6,43 @@ export class QuestionTree {
     }
 
     // Inserts two new nodes correctly into the tree
-    insertNewQA(currentNode, newQ, yesOrNo, newA) {
+    insertNewQA(nodeToFind, newQ, yesOrNo, newA) {
         let newQuestionNode = new Node(newQ, null);
         let newAnswerNode = new Node(null, newA);
 
+        if (this.isYes(yesOrNo)) {
+            newQuestionNode.yes = newAnswerNode;
+            newQuestionNode.no = nodeToFind;
+        } else {
+            newQuestionNode.no = newAnswerNode;
+            newQuestionNode.yes = nodeToFind;
+        }
+
         // Check if there is a root
         if (!this.root) return;
-        if (this.root == currentNode) {
+        if (this.root.answer == nodeToFind.answer) {
             this.root = newQuestionNode;
-            if (this.isYes(yesOrNo)) {
-                this.root.yes = newAnswerNode;
-                this.root.no = currentNode;
-            } else {
-                this.root.no = newAnswerNode;
-                this.root.yes = currentNode;
-            }
             return;
         }
 
-        
-        // let newQuestionNode = new Node(newQ, null);
-        // let newAnswerNode = new Node(null, newA);
-        // let oldNode = currentNode;
-
-        // currentNode = newQuestionNode;
-        // if (this.isYes(yesOrNo)) {
-        //     currentNode.yes = newAnswerNode;
-        //     currentNode.no = oldNode;
-        // } else {
-        //     currentNode.no = newAnswerNode;
-        //     currentNode.yes = oldNode;
-        // }        
+        // Otherwise, traverse the tree, starting from the root
+        let currentNode = this.root;
+        let childNode;
+        function traverse(currentNode) {
+            if (!currentNode.yes && !currentNode.no) return;
+            if (currentNode.yes == nodeToFind) {
+                childNode = currentNode.yes;                
+                currentNode.yes = newQuestionNode;
+                return;
+            } else if (currentNode.no == nodeToFind) {
+                childNode = currentNode.no;                
+                currentNode.no = newQuestionNode;
+                return;
+            }            
+            if (currentNode.yes) traverse(currentNode.yes);
+            if (currentNode.no) traverse(currentNode.no);
+        }
+        traverse(currentNode);
     }
 
     // Assume node will always be a leaf

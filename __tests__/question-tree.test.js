@@ -4,7 +4,7 @@ import { Node } from '../src/node';
 describe("QuestionTree", () => {
 
     let qTree = new QuestionTree();
-    let expectedResultTree = new QuestionTree();
+    let expectedResult = new QuestionTree();
     let newQ;
     let newA;
     let currentNode;
@@ -32,59 +32,57 @@ describe("QuestionTree", () => {
 
     // INSERT NEW Q&A METHOD ===============================
     describe("INSERT NEW Q&A", () => {
-        test("insertNewQA method on a new tree should replace the root with a new Question node, the new root will have new children: the new Answer node and the old root", () => {
+        test("Insert #1: insertNewQA method on a new tree should replace the root with a new Question node, the new root will have new children: the new Answer node and the old root", () => {
             currentNode = qTree.root;
             newQ = "Is it an animal?";
             newA = "kangaroo";
             qTree.insertNewQA(currentNode, newQ, YES, newA);
 
-            expectedResultTree.root = new Node(newQ, null);
-            expectedResultTree.root.yes = new Node(null, newA);
-            expectedResultTree.root.no = new Node(null, "computer");
+            expectedResult.root = new Node(newQ, null);
+            expectedResult.root.yes = new Node(null, newA);
+            expectedResult.root.no = new Node(null, "computer");
             
-            expect(qTree.root).toEqual(expectedResultTree.root);
+            expect(qTree.root).toEqual(expectedResult.root);
         });
 
-        // test("insertNewQA method should replace the root/old leaf node with a new question node, then the new root should have the old leaf and the new answer node as its children", () => {
-        //     currentNode = qTree.root;
-        //     newQ = "Is it an animal?";
-        //     newA = "kangaroo";
-        //     qTree.insertNewQA(currentNode, newQ, YES, newA);
+        test("Insert #2: Inserting new question and answer nodes should be placed correctly in the tree", () => {
+            currentNode = qTree.root.yes;
+            newQ = "Does it move slowly?";
+            newA = "sloth";
+            qTree.insertNewQA(currentNode, newQ, YES, newA);
 
-        //     expectedResultTree.root = new Node(newQ, null);
-        //     expectedResultTree.root.yes = new Node(null, newA);
-        //     expectedResultTree.root.no = new Node(null, "computer");
+            expectedResult.root.yes = new Node(newQ, null);
+            expectedResult.root.yes.yes = new Node(null, newA);
+            expectedResult.root.yes.no = new Node(null, "kangaroo");
 
-        //     expect(qTree).toEqual(expectedResultTree);
-        // });
+            expect(qTree.root).toEqual(expectedResult.root);
+        });
 
-        // test("insertNewQA method should continue to modify the tree appropriately", () => {
-        //     currentNode = qTree.root.yes;
-        //     newQ = "Does it move slowly?";
-        //     newA = "sloth";
-        //     qTree.insertNewQA(currentNode, newQ, YES, newA);
+        test("Insert #3: Inserting new question and answer nodes should continue to modify the tree appropriately", () => {            
+            currentNode = qTree.root.yes.no;
+            newQ = "Does it jump skillfully?";
+            newA = "cheetah";
+            qTree.insertNewQA(currentNode, newQ, NO, newA);
 
-        //     expectedResultTree.root.yes = new Node(newQ, null);
-        //     expectedResultTree.root.yes.yes = new Node(null, newA);
-        //     expectedResultTree.root.yes.no = new Node(null, "kangaroo");
+            expectedResult.root.yes.no = new Node(newQ, null);
+            expectedResult.root.yes.no.no = new Node(null, newA);
+            expectedResult.root.yes.no.yes = new Node(null, "kangaroo");
 
-        //     expect(qTree).toEqual(expectedResultTree);
-        // });
+            expect(qTree).toEqual(expectedResult);
+        });
 
-        // test("insertNewQA method should continue to modify the tree appropriately", () => {
-        //     currentNode = qTree.root.yes.no;
-        //     newQ = "Does it jump skillfully?";
-        //     newA = "cheetah";
-        //     qTree.insertNewQA(currentNode, newQ, NO, newA);
+        test("Insert #4: Inserting new question and answer nodes to the right side of the tree should also continue to modify the tree appropriately", () => {            
+            currentNode = qTree.root.no;
+            newQ = "Is it an object?";
+            newA = "programmer";
+            qTree.insertNewQA(currentNode, newQ, NO, newA);
 
-        //     expectedResultTree.root.yes.no = new Node(newQ, null);
-        //     expectedResultTree.root.yes.no.no = new Node(null, newA);
-        //     expectedResultTree.root.yes.no.yes = new Node(null, "kangaroo");
-            
-        //     expect(qTree).toEqual(expectedResultTree);
+            expectedResult.root.no = new Node(newQ, null);
+            expectedResult.root.no.no = new Node(null, newA);
+            expectedResult.root.no.yes = new Node(null, "computer");
 
-        // });
-
+            expect(qTree).toEqual(expectedResult);
+        });
     });
 
    
