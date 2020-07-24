@@ -35,6 +35,7 @@ No known bugs at this time.
 * [Semantic UI](https://semantic-ui.com/)
 * [Jest](https://jestjs.io/docs/en/api)
 * [Visual Studio Code](https://code.visualstudio.com/)
+* Linux VM
 
 ## Learning Resources
 

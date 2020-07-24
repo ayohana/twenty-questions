@@ -48,6 +48,14 @@ export class Game {
         }
     }
 
+    currentNodeIsLeafNode() {
+        if (!this.currentNode.yes && !this.currentNode.no) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Returns true if user inputs a yes, otherwise false
     isYes(yesOrNo) {
         if (yesOrNo == null) return null;

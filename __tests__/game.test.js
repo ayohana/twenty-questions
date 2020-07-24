@@ -75,7 +75,7 @@ describe("GAME", () => {
         });
 
         test("Round #1: getCurrentNode method should return the currentNode property", () => {
-            expect(testGame.getCurrentNode()).toEqual(testGame.questionTree.root);
+            expect(testGame.getCurrentNode(NO)).toEqual(testGame.questionTree.root);
         });
 
         test("Round #1: setNewNodes method should insert two new nodes correctly into the question tree property", () => {

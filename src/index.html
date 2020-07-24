@@ -17,14 +17,19 @@
     <br>
 
     <div id="gameDiv">
-      <h3 id="question" class="ui header">Test</h3>
+      <h3 id="textOutput" class="ui header">Test</h3>
 
       <br>
 
-      <div class="ui buttons">
-        <button class="ui button">Yes</button>
+      <div id="yesOrNoButtons" class="ui buttons">
+        <button id="yesBtn" class="ui button">Yes</button>
         <div class="or"></div>
-        <button class="ui positive button">No</button>
+        <button id="noBtn" class="ui positive button">No</button>
+      </div>
+
+      <div id="startNextRoundBtn" class="ui animated button" tabindex="0">
+        <div class="visible content">Next Round</div>
+        <div class="hidden content">Start!</div>
       </div>
     </div>
 
