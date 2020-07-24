@@ -2,53 +2,56 @@ import './styles.css' ;
 import $ from 'jquery';
 import { Game } from '../src/game';
 
-function getQuestionText(currentNode) {
-    if (!currentNode) return "Text unavailable!";
-    if (currentNode.question) return currentNode.question;
-    if (currentNode.answer) return `Are you thinking of: ${currentNode.answer}?`;    
-}
-
 $(document).ready(function() {
 
     let game = new Game();
-    let questionsCounter = 0;
     let yesOrNo = null;
     let newQuestion, newAnswer;
 
     $("#gameDiv").hide();
 
-    $("#startBtn").click(function() {
-        $("#startBtn").slideToggle(250);
-        $("#gameDiv").slideToggle(500);
+    // Clicking the start new game/start next round button will trigger the following chain of events
+    $("#startBtn, #startNextRoundBtn").click(function() {
+        $("#startBtn").hide();
+        $("#gameDiv").slideDown(500);
+        $("#yesOrNoButtons").slideDown(500);
         $("#startNextRoundBtn").hide();
         $("#inputDiv").hide();
+
+        // Display the root's question
         displayNextQuestion();
+
+        // Clicking yes/no will display the next question
+        // TODO: Will also check if game is over when the computer's asking its last question
         $("#yesBtn").click(function() {
             yesOrNo = "Yes";
-            if (!isGameOver()) {
-                displayNextQuestion();   
-            } else {
-                displayGameOver();
-            }
-            
+            displayNextQuestion();            
         });
         $("#noBtn").click(function() {
             yesOrNo = "No";
-            if (!isGameOver()) {
-                displayNextQuestion();   
-            } else {
-                displayGameOver();
-            }
+            displayNextQuestion(); 
         });
 
         
-        // Displays text of next question
+        // If there is a next node, display its text
+        // ?TODO: If next node is null, then display game over text
         function displayNextQuestion() {            
-            game.setCurrentNode(yesOrNo);            
-            $("#textOutput").html(getQuestionText(game.getCurrentNode()));                        
-            questionsCounter += 1;
-            console.log("round #", questionsCounter);
-            console.log("currentNode", game.getCurrentNode());
+            game.setCurrentNode(yesOrNo);      
+            let currentNode = game.getCurrentNode();
+            console.log("currentNode", currentNode);
+            let text;
+            if (!currentNode && isGameOver()) {
+                displayGameOver();
+                return;
+            }
+            if (currentNode.question) {
+                text = currentNode.question;
+            } else if (currentNode.answer) {
+                text = `Are you thinking of: ${currentNode.answer}?`;
+            }          
+            $("#textOutput").html(text);                        
+            game.setQuestionsCounter();
+            console.log("round #", game.getQuestionsCounter());
         }
 
         // Displays text of game over and who wins
@@ -56,6 +59,7 @@ $(document).ready(function() {
             if (yesOrNo == "Yes") {
                 $("#textOutput").html("Hooray, I win!");
                 game.setCompWinsGame();
+                $("#startNextRoundBtn").slideDown(500);
             } else {
                 $("#textOutput").html("Drat, I lost.");
                 game.setPlayerWinsGame();
@@ -64,22 +68,23 @@ $(document).ready(function() {
             $("#yesOrNoButtons").hide();
             $("#playerScore").html(game.getPlayerWins());
             $("#computerScore").html(game.getComputerWins());
+            yesOrNo = null;
         }
 
         // Returns true if a condition of the end of a round is met, otherwise returns false
         function isGameOver() {
             // The round is over when we have reached 20 questions or when we are currently on a leaf node
-            if (questionsCounter > 20 || game.currentNodeIsLeafNode()) {
-                questionsCounter = 0;
+            if (game.getQuestionsCounter() > 20 || game.currentNodeIsLeafNode()) {
+                game.resetQuestionsCounter();
                 return true;
             }
             return false;
         }
-
-        
+     
 
     });
 
+    // Triggers a chain of show/hide forms to get user input
     function displayForm() {
         $("#inputDiv").show();
         $("form#newAnswer").show();

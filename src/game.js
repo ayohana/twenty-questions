@@ -5,7 +5,8 @@ export class Game {
         this.questionTree = new QuestionTree(),
         this.computerWins = 0,
         this.playerWins = 0,
-        this.currentNode = null
+        this.currentNode = null,
+        this.questionsCounter = 0;
     }
 
     getPlayerWins() {
@@ -18,6 +19,18 @@ export class Game {
 
     getCurrentNode() {
         return this.currentNode;
+    }
+
+    getQuestionsCounter() {
+        return this.questionsCounter;
+    }
+
+    resetQuestionsCounter() {
+        this.questionsCounter = 0;
+    }
+
+    setQuestionsCounter() {
+        this.questionsCounter += 1;
     }
 
     setPlayerWinsGame() {
@@ -43,12 +56,13 @@ export class Game {
 
     setNewNodes(newQ, yesOrNo, newA) {
         if (this.currentNode) {
-            this.questionTree.insertNewQA(this.getCurrentNode(), newQ, yesOrNo, newA)
+            this.questionTree.insertNewQA(this.getCurrentNode(), newQ, yesOrNo, newA);
             this.setCurrentNode();
         }
     }
 
     currentNodeIsLeafNode() {
+        if (!this.currentNode) return false;
         if (!this.currentNode.yes && !this.currentNode.no) {
             return true;
         } else {

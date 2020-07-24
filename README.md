@@ -44,6 +44,7 @@ No known bugs at this time.
     * [Twenty-One Questions Assignment Prompt](https://web.stanford.edu/class/archive/cs/cs106x/cs106x.1174/assn/twentyOneQuestions.html)
 * [JavaScript Naming Convention](https://www.robinwieruch.de/javascript-naming-conventions)
 * [Semantic UI CDN](https://stackoverflow.com/questions/30281258/how-to-use-semantic-ui-cdn)
+* ["There is no way to pause a function/loop in JavaScript/jQuery"](https://stackoverflow.com/questions/23754587/wait-for-click-in-loop)
 
 ## Contact
 
