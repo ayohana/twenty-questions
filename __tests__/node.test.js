@@ -1,6 +1,6 @@
 import { Node } from '../src/node';
 
-describe ("Node", () => {
+describe ("NODE", () => {
 
     let newQuestionNode;
     let newAnswerNode;
@@ -11,9 +11,9 @@ describe ("Node", () => {
     });
 
     test("Data type of question property of newQuestionNode should be a string", () => {
-        expect.objectContaining({
+        expect(newQuestionNode).toEqual(expect.objectContaining({
             question: expect.any(String)
-        });
+        }));
     });
 
     test("Data type of answer property of newQuestionNode should be null", () => {

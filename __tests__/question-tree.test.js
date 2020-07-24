@@ -1,7 +1,7 @@
 import { QuestionTree } from '../src/question-tree';
 import { Node } from '../src/node';
 
-describe("QuestionTree", () => {
+describe("QUESTION TREE", () => {
 
     let qTree = new QuestionTree();
     let expectedResult = new QuestionTree();
