@@ -17,10 +17,10 @@ describe("GAME", () => {
     test("Properties of instance should have the correct data types", () => {
         expect(testGame).toEqual(expect.objectContaining({
             questionTree: expect.any(QuestionTree),
-            currentNode: expect.toBeNull(),
             computerWins: expect.any(Number),
             playerWins: expect.any(Number)           
         }));
+        expect(testGame.currentNode).toBeNull();
     });
 
 
@@ -29,11 +29,11 @@ describe("GAME", () => {
     // POINTS GETTERS & SETTERS ======================
     describe("GETTING POINTS", () => {
         test("getPlayerWins method should return property playerWins", () => {            
-            expect(testGame.getPlayerWins()).toEqual(1);
+            expect(testGame.getPlayerWins()).toEqual(0);
         });
     
         test("getComputerWins method should return property computerWins", () => {            
-            expect(testGame.getComputerWins()).toEqual(1);
+            expect(testGame.getComputerWins()).toEqual(0);
         });
     });
 
@@ -46,6 +46,16 @@ describe("GAME", () => {
         test("setCompWinsGame method should increment property computerWins", () => {
             testGame.setCompWinsGame();
             expect(testGame.computerWins).toEqual(1);
+        });
+    });
+
+    describe("GETTING POINTS", () => {
+        test("getPlayerWins method should return property playerWins", () => {            
+            expect(testGame.getPlayerWins()).toEqual(1);
+        });
+    
+        test("getComputerWins method should return property computerWins", () => {            
+            expect(testGame.getComputerWins()).toEqual(1);
         });
     });
     

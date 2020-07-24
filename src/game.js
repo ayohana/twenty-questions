@@ -3,16 +3,17 @@ import { QuestionTree } from '../src/question-tree';
 export class Game {
     constructor() {
         this.questionTree = new QuestionTree();
+        this.currentNode = null;
         this.computerWins = 0;
         this.playerWins = 0;
     }
 
     setPlayerWinsGame() {
-        this.playerWins++;
+        this.playerWins += 1;
     }
 
     setCompWinsGame() {
-        this.computerWins++;
+        this.computerWins += 1;
     }
 
     getPlayerWins() {
