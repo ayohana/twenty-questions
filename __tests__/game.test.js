@@ -5,6 +5,10 @@ describe("GAME", () => {
 
     let testGame = new Game();
     let expectedResultGame = new Game();
+    let newQ;
+    let newA;
+    const YES = "Yes";
+    const NO = "No";
 
     test("Creates an instance of Game", () => {
         expect(testGame).toBeInstanceOf(Game);
@@ -13,6 +17,7 @@ describe("GAME", () => {
     test("Properties of instance should have the correct data types", () => {
         expect(testGame).toEqual(expect.objectContaining({
             questionTree: expect.any(QuestionTree),
+            currentNode: expect.toBeNull(),
             computerWins: expect.any(Number),
             playerWins: expect.any(Number)           
         }));
@@ -22,6 +27,16 @@ describe("GAME", () => {
 
 
     // POINTS GETTERS & SETTERS ======================
+    describe("GETTING POINTS", () => {
+        test("getPlayerWins method should return property playerWins", () => {            
+            expect(testGame.getPlayerWins()).toEqual(1);
+        });
+    
+        test("getComputerWins method should return property computerWins", () => {            
+            expect(testGame.getComputerWins()).toEqual(1);
+        });
+    });
+
     describe("SETTING POINTS", () => {
         test("setPlayerWinsGame method should increment property playerWins", () => {
             testGame.setPlayerWinsGame();
@@ -32,30 +47,40 @@ describe("GAME", () => {
             testGame.setCompWinsGame();
             expect(testGame.computerWins).toEqual(1);
         });
-
-        test("getPlayerWins method should return property playerWins", () => {            
-            expect(testGame.getPlayerWins()).toEqual(1);
-        });
-    
-        test("getComputerWins method should return property computerWins", () => {            
-            expect(testGame.getComputerWins()).toEqual(1);
-        });
     });
     
 
 
-    // test("play method should traverse the question tree property starting from its root to an answer leaf by asking yes/no questions", () => {
-        
-    // });
 
-    // test("Given 4 params: the root, user inputs of new answer, new question and its yes/no answer, updateTree method should modify the tree correctly", () => {
-    //     testGame.updateTree();
-    //     expect(testGame.questionTree).toEqual(expectedResultGame.questionTree);
-    // });
+    // NODES GETTERS & SETTERS ========================
+    describe("GETTING & SETTING NODES", () => {
+        test("getNextNode method should return the next node", () => {
+            expect(testGame.getNextNode()).toEqual(testGame.questionTree.root);
+        });
 
-    // test("Given the root as a parameter, getNextQuestion method should return the next question node", () => {
+        test("setNewNodes method should insert two new nodes correctly into the question tree property", () => {
+            newQ = "Is it an animal?";
+            newA = "kangaroo"
+            testGame.setNewNodes(newQ, YES, newA);
 
-    // })
+            expectedResultGame.questionTree.root = new Node(newQ, null);
+            expectedResultGame.questionTree.root.yes = new Node(null, newA);
+            expectedResultGame.questionTree.root.no = new Node(null, "computer");
 
+            expect(testGame.questionTree.root).toEqual(expectedResultGame.questionTree.root);
+        });
+
+        test("After setting new nodes, currentNode property should be reset to null", () => {
+            expect(testGame.currentNode).toBeNull();
+        });
+
+        test("Invoke #1: given no params, getNextNode method should return the root", () => {
+            expect(testGame.getNextNode()).toEqual(testGame.questionTree.root);
+        });
+
+        test("Invoke #2: getNextNode method should return the next node", () => {
+            expect(testGame.getNextNode(YES)).toEqual(expectedResultGame.questionTree.root.yes);
+        });
+    });
 
 });
