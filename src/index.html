@@ -17,8 +17,36 @@
     <br>
 
     <div id="gameDiv">
-      <h3 id="textOutput" class="ui header">Test</h3>
+      <h3 id="textOutput" class="ui header">My output text goes here.</h3>
 
+      <div id="inputDiv">
+        <form id="newAnswer" class="ui form">
+          <div class="field">
+            <label>What was your object?</label>
+            <input id="fieldNewAnswer" type="text" name="newAnswer" placeholder="sloth">
+          </div>
+          <button class="ui button" type="submit">Submit</button>
+        </form>
+        <form id="newQuestion" class="ui form">
+          <div class="field">
+            <label>Type a Y/N question to distinguish your object from computer:</label>
+            <input id="fieldNewQuestion" type="text" name="newQuestion" placeholder="Does it move slowly?">
+          </div>
+          <button class="ui button" type="submit">Submit</button>
+        </form>
+        <form id="yesOrNo" class="ui form">
+          <div class="field">
+            <label>And what is the answer for your object?</label>
+            <input id="fieldYesOrNo" type="text" name="yesOrNo" placeholder="Yes">
+          </div>
+          <button class="ui button" type="submit">Submit</button>
+        </form>
+      </div>
+
+      <div id="pointsDiv">
+        <p>Your score: <span id="playerScore">0</span></p>
+        <p>My score: <span id="computerScore">0</span></p>
+      </div>
       <br>
 
       <div id="yesOrNoButtons" class="ui buttons">

@@ -13,6 +13,7 @@ $(document).ready(function() {
     let game = new Game();
     let questionsCounter = 0;
     let yesOrNo = null;
+    let newQuestion, newAnswer;
 
     $("#gameDiv").hide();
 
@@ -20,6 +21,7 @@ $(document).ready(function() {
         $("#startBtn").slideToggle(250);
         $("#gameDiv").slideToggle(500);
         $("#startNextRoundBtn").hide();
+        $("#inputDiv").hide();
         displayNextQuestion();
         $("#yesBtn").click(function() {
             yesOrNo = "Yes";
@@ -52,12 +54,16 @@ $(document).ready(function() {
         // Displays text of game over and who wins
         function displayGameOver() {           
             if (yesOrNo == "Yes") {
-                $("#textOutput").html("Game over. You lose!");
+                $("#textOutput").html("Hooray, I win!");
+                game.setCompWinsGame();
             } else {
-                $("#textOutput").html("Game over. You win!");
+                $("#textOutput").html("Drat, I lost.");
+                game.setPlayerWinsGame();
+                displayForm();
             }
             $("#yesOrNoButtons").hide();
-            $("#startNextRoundBtn").slideToggle(250);
+            $("#playerScore").html(game.getPlayerWins());
+            $("#computerScore").html(game.getComputerWins());
         }
 
         // Returns true if a condition of the end of a round is met, otherwise returns false
@@ -70,6 +76,38 @@ $(document).ready(function() {
             return false;
         }
 
+        
+
+    });
+
+    function displayForm() {
+        $("#inputDiv").show();
+        $("form#newAnswer").show();
+        $("form#newQuestion").hide();
+        $("form#yesOrNo").hide();
+    }
+
+    $("form#newAnswer").submit(function(event) {
+        event.preventDefault();
+        newAnswer = $("#fieldNewAnswer").val();
+        $("form#newAnswer").hide();
+        $("form#newQuestion").slideDown(500);
+    });
+
+    $("form#newQuestion").submit(function(event) {
+        event.preventDefault();
+        newQuestion = $("#fieldNewQuestion").val();
+        $("form#newQuestion").hide();
+        $("form#yesOrNo").slideDown(500);
+    });
+
+    $("form#yesOrNo").submit(function(event) {
+        event.preventDefault();
+        let inputYesOrNo = $("#fieldYesOrNo").val();
+        game.setNewNodes(newQuestion, inputYesOrNo, newAnswer);
+        console.log("Tree's root", game.questionTree.root);
+        $("form#yesOrNo").hide();
+        $("#startNextRoundBtn").slideDown(500);
     });
 
 });
