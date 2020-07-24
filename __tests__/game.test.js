@@ -150,6 +150,33 @@ describe("GAME", () => {
         test("Round #3: Reset the currentNode property when end of game is reached", () => {
             expect(testGame.getCurrentNode()).toBeNull();
         });
+
+        test("Round #4: Invoke #1: given no params, setCurrentNode method set the currentNode property starting from the root", () => {
+            testGame.setCurrentNode();
+            expect(testGame.getCurrentNode()).toEqual(testGame.questionTree.root);
+        });
+
+        test("Round #4: Invoke #2: Given user input of yes/no, setCurrentNode method should set the currentNode property to the correct node", () => {
+            testGame.setCurrentNode(NO);
+            expect(testGame.getCurrentNode()).toEqual(testGame.questionTree.root.no);
+        });
+
+        test("Round #4: setNewNodes method should insert two new nodes correctly into the question tree property", () => {
+            newQ = "Is it an object?";
+            newA = "programmer";
+            testGame.setNewNodes(newQ, NO, newA);
+
+            expectedResultGame.questionTree.root.no = new Node(newQ, null);
+            expectedResultGame.questionTree.root.no.no = new Node(null, newA);
+            expectedResultGame.questionTree.root.no.yes = new Node(null, "computer");
+
+            expect(testGame.questionTree.root).toEqual(expectedResultGame.questionTree.root);
+        });
+
+        test("Round #4: Reset the currentNode property when end of game is reached", () => {
+            expect(testGame.getCurrentNode()).toBeNull();
+        });
+
     });
 
 });
