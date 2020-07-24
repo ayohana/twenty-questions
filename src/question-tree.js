@@ -2,7 +2,7 @@ import { Node } from '../src/node';
 
 export class QuestionTree {
     constructor() {
-        this.root = new Node(null, "computer")
+        this.root = new Node(null, "computer");
     }
 
     // Inserts two new nodes correctly into the tree

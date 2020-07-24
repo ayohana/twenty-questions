@@ -12,7 +12,7 @@
     },
     "rules": {
         "semi": 1,
-        "indent": ["warn", 2],
+        "indent": ["warn", 4],
         "no-console": "warn",
         "no-debugger": "warn",
         "no-unused-vars": "warn"

@@ -1,7 +1,7 @@
 {
   "name": "twenty-questions",
   "version": "1.0.0",
-  "description": "An application that implements a yes/no guessing game called 20 Questions.",
+  "description": "A web application that implements a yes/no guessing game called 20 Questions.",
   "main": "main.js",
   "scripts": {
     "build": "webpack --mode development",
@@ -29,7 +29,6 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
-    "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.1",
     "serialize-javascript": "^2.1.1"

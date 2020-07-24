@@ -18,7 +18,7 @@ module.exports = {
     new UglifyJsPlugin({ sourceMap: true }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Title',
+      title: 'Twenty Questions',
       template: './src/index.html',
       inject: 'body'
     }),

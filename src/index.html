@@ -2,8 +2,31 @@
 <html>
   <head>
     <title>Twenty Questions</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   </head>
   <body>
-    
+    <h1 class="ui header">Twenty Questions</h1>
+
+    <div id="startBtn" class="ui animated button" tabindex="0">
+      <div class="visible content">New Game</div>
+      <div class="hidden content">Start!</div>
+    </div>
+
+    <br>
+
+    <div id="gameDiv">
+      <h3 id="question" class="ui header">Test</h3>
+
+      <br>
+
+      <div class="ui buttons">
+        <button class="ui button">Yes</button>
+        <div class="or"></div>
+        <button class="ui positive button">No</button>
+      </div>
+    </div>
+
   </body>
 </html>
