@@ -25,6 +25,22 @@ export class Game {
         return this.questionsCounter;
     }
 
+    getNextQuestion(yesOrNo = null) {
+        this.setCurrentNode(yesOrNo);
+        this.setQuestionsCounter();
+
+        let currentNode = this.getCurrentNode();
+        console.log(currentNode);
+        if (currentNode) {
+            if (currentNode.question) {                
+                return currentNode.question;
+            } else if (currentNode.answer) {
+                return `Are you thinking of: ${currentNode.answer}?`;
+            }
+        }
+        return null;
+    }
+
     resetQuestionsCounter() {
         this.questionsCounter = 0;
     }
@@ -54,10 +70,24 @@ export class Game {
         }
     }
 
+    resetCurrentNode() {
+        this.currentNode = null;
+    }
+
     setNewNodes(newQ, yesOrNo, newA) {
         if (this.currentNode) {
             this.questionTree.insertNewQA(this.getCurrentNode(), newQ, yesOrNo, newA);
-            this.setCurrentNode();
+            this.resetCurrentNode();
+        }
+    }
+
+    isComputerWinner(yesOrNo) {
+        if (this.isYes(yesOrNo)) {
+            this.setCompWinsGame();
+            return true;
+        } else {
+            this.setPlayerWinsGame();
+            return false;
         }
     }
 

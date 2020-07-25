@@ -20,69 +20,65 @@ $(document).ready(function() {
 
         // Display the root's question
         displayNextQuestion();
-
-        // Clicking yes/no will display the next question
-        // TODO: Will also check if game is over when the computer's asking its last question
-        $("#yesBtn").click(function() {
-            yesOrNo = "Yes";
-            displayNextQuestion();            
-        });
-        $("#noBtn").click(function() {
-            yesOrNo = "No";
-            displayNextQuestion(); 
-        });
-
         
-        // If there is a next node, display its text
-        // ?TODO: If next node is null, then display game over text
-        function displayNextQuestion() {            
-            game.setCurrentNode(yesOrNo);      
-            let currentNode = game.getCurrentNode();
-            console.log("currentNode", currentNode);
-            let text;
-            if (!currentNode && isGameOver()) {
-                displayGameOver();
-                return;
-            }
-            if (currentNode.question) {
-                text = currentNode.question;
-            } else if (currentNode.answer) {
-                text = `Are you thinking of: ${currentNode.answer}?`;
-            }          
-            $("#textOutput").html(text);                        
-            game.setQuestionsCounter();
-            console.log("round #", game.getQuestionsCounter());
-        }
-
-        // Displays text of game over and who wins
-        function displayGameOver() {           
-            if (yesOrNo == "Yes") {
-                $("#textOutput").html("Hooray, I win!");
-                game.setCompWinsGame();
-                $("#startNextRoundBtn").slideDown(500);
-            } else {
-                $("#textOutput").html("Drat, I lost.");
-                game.setPlayerWinsGame();
-                displayForm();
-            }
-            $("#yesOrNoButtons").hide();
-            $("#playerScore").html(game.getPlayerWins());
-            $("#computerScore").html(game.getComputerWins());
-            yesOrNo = null;
-        }
-
         // Returns true if a condition of the end of a round is met, otherwise returns false
-        function isGameOver() {
-            // The round is over when we have reached 20 questions or when we are currently on a leaf node
-            if (game.getQuestionsCounter() > 20 || game.currentNodeIsLeafNode()) {
-                game.resetQuestionsCounter();
-                return true;
-            }
-            return false;
-        }
+        // function isGameOver() {
+        //     // The round is over when we have reached 20 questions or when we are currently on a leaf node
+        //     if (game.getQuestionsCounter() > 20 || game.currentNodeIsLeafNode()) {
+        //         game.resetQuestionsCounter();
+        //         return true;
+        //     }
+        //     return false;
+        // }
      
 
     });
+
+    // Clicking yes/no will display the next question
+    // TODO: Will also check if game is over when the computer's asking its last question
+    $("#yesBtn").click(function() {
+        const YES = "Yes";
+        if (!displayNextQuestion(YES)) {
+            displayWinner(YES);   
+        }        
+    });
+    $("#noBtn").click(function() {
+        const NO = "No";
+        if (!displayNextQuestion(NO)) {
+            displayWinner(NO);   
+        }  
+    });
+
+    
+    // If there is a next node, display its text
+    // ?TODO: If next node is null, then display game over text
+    function displayNextQuestion(yesOrNo) {                
+        let text = game.getNextQuestion(yesOrNo);
+        if (!text) {
+            return null;
+        }      
+        $("#textOutput").html(text);                        
+        console.log("round #", game.getQuestionsCounter());
+        console.log("text", text);
+    }
+
+    // Displays text of game over and who wins
+    function displayWinner(yesOrNo) {                        
+        if (game.isComputerWinner(yesOrNo)) {
+            $("#textOutput").html("Hooray, I win!");
+            $("#startNextRoundBtn").slideDown(500);
+        } else {
+            $("#textOutput").html("Drat, I lost.");
+            displayForm();
+        }
+        displayScores();
+    }
+
+    function displayScores() {
+        $("#yesOrNoButtons").hide();
+        $("#playerScore").html(game.getPlayerWins());
+        $("#computerScore").html(game.getComputerWins());
+    }
 
     // Triggers a chain of show/hide forms to get user input
     function displayForm() {
