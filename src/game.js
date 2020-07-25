@@ -7,6 +7,7 @@ export class Game {
         this.playerWins = 0,
         this.currentNode = null,
         this.questionsCounter = 0;
+        this.isLastQuestion = false;
     }
 
     getPlayerWins() {
@@ -20,6 +21,10 @@ export class Game {
     getCurrentNode() {
         return this.currentNode;
     }
+    
+    getIsLastQuestion() {
+        return this.isLastQuestion;
+    }
 
     getQuestionsCounter() {
         return this.questionsCounter;
@@ -30,11 +35,11 @@ export class Game {
         this.setQuestionsCounter();
 
         let currentNode = this.getCurrentNode();
-        console.log(currentNode);
         if (currentNode) {
             if (currentNode.question) {                
                 return currentNode.question;
             } else if (currentNode.answer) {
+                this.resetQuestionsCounter();
                 return `Are you thinking of: ${currentNode.answer}?`;
             }
         }
@@ -59,15 +64,26 @@ export class Game {
 
     setCurrentNode(yesOrNo = null) {
         // Check if there is a currentNode
+        this.setIsLastQuestionFalse();
         if (!yesOrNo && !this.currentNode) {
             this.currentNode = this.questionTree.root;
+        } else if (!this.currentNode.yes && !this.currentNode.no) {
+            // If it's a leaf node, leave the current node be
+            this.setIsLastQuestionTrue();
+            return;
         } else if (this.isYes(yesOrNo) && this.currentNode) {
             this.currentNode = this.currentNode.yes;
         } else if (!this.isYes(yesOrNo) && this.currentNode) {
             this.currentNode = this.currentNode.no;
-        } else {
-            this.currentNode = null;
         }
+    }
+
+    setIsLastQuestionTrue() {
+        this.isLastQuestion = true;
+    }
+
+    setIsLastQuestionFalse() {
+        this.isLastQuestion = false;
     }
 
     resetCurrentNode() {
@@ -75,10 +91,9 @@ export class Game {
     }
 
     setNewNodes(newQ, yesOrNo, newA) {
-        if (this.currentNode) {
-            this.questionTree.insertNewQA(this.getCurrentNode(), newQ, yesOrNo, newA);
-            this.resetCurrentNode();
-        }
+        console.log(this.getCurrentNode());
+        this.questionTree.insertNewQA(this.getCurrentNode(), newQ, yesOrNo, newA);
+        this.resetCurrentNode();        
     }
 
     isComputerWinner(yesOrNo) {

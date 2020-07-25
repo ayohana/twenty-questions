@@ -5,8 +5,8 @@ import { Game } from '../src/game';
 $(document).ready(function() {
 
     let game = new Game();
-    let yesOrNo = null;
-    let newQuestion, newAnswer;
+    const YES = "Yes";
+    const NO = "No";
 
     $("#gameDiv").hide();
 
@@ -18,9 +18,9 @@ $(document).ready(function() {
         $("#startNextRoundBtn").hide();
         $("#inputDiv").hide();
 
-        // Display the root's question
+        // Display the first question from root node
         displayNextQuestion();
-        
+
         // Returns true if a condition of the end of a round is met, otherwise returns false
         // function isGameOver() {
         //     // The round is over when we have reached 20 questions or when we are currently on a leaf node
@@ -35,23 +35,25 @@ $(document).ready(function() {
     });
 
     // Clicking yes/no will display the next question
-    // TODO: Will also check if game is over when the computer's asking its last question
+    // If there is no next question, display the winner
     $("#yesBtn").click(function() {
-        const YES = "Yes";
-        if (!displayNextQuestion(YES)) {
+        displayNextQuestion(YES)
+        if (game.getIsLastQuestion()) {
             displayWinner(YES);   
         }        
     });
+
     $("#noBtn").click(function() {
-        const NO = "No";
-        if (!displayNextQuestion(NO)) {
+        displayNextQuestion(NO)
+        if (game.getIsLastQuestion()) {
             displayWinner(NO);   
-        }  
+        } 
     });
 
     
     // If there is a next node, display its text
-    // ?TODO: If next node is null, then display game over text
+    // Otherwise, return null
+    // TODO: After winning, currentNode should revert back to root!
     function displayNextQuestion(yesOrNo) {                
         let text = game.getNextQuestion(yesOrNo);
         if (!text) {
@@ -59,10 +61,10 @@ $(document).ready(function() {
         }      
         $("#textOutput").html(text);                        
         console.log("round #", game.getQuestionsCounter());
-        console.log("text", text);
+        console.log("currentNode", game.getCurrentNode());
     }
 
-    // Displays text of game over and who wins
+    // Displays winner and scoreboard
     function displayWinner(yesOrNo) {                        
         if (game.isComputerWinner(yesOrNo)) {
             $("#textOutput").html("Hooray, I win!");
@@ -88,6 +90,8 @@ $(document).ready(function() {
         $("form#yesOrNo").hide();
     }
 
+    let yesOrNo, newQuestion, newAnswer;
+
     $("form#newAnswer").submit(function(event) {
         event.preventDefault();
         newAnswer = $("#fieldNewAnswer").val();
@@ -102,11 +106,13 @@ $(document).ready(function() {
         $("form#yesOrNo").slideDown(500);
     });
 
+    // TODO: Check if Tree is updated correctly!
     $("form#yesOrNo").submit(function(event) {
         event.preventDefault();
-        let inputYesOrNo = $("#fieldYesOrNo").val();
-        game.setNewNodes(newQuestion, inputYesOrNo, newAnswer);
+        yesOrNo = $("#fieldYesOrNo").val();
+        game.setNewNodes(newQuestion, yesOrNo, newAnswer);
         console.log("Tree's root", game.questionTree.root);
+        $("#textOutput").html("New object is saved. Challenge me again!");
         $("form#yesOrNo").hide();
         $("#startNextRoundBtn").slideDown(500);
     });
