@@ -91,7 +91,6 @@ export class Game {
     }
 
     setNewNodes(newQ, yesOrNo, newA) {
-        console.log(this.getCurrentNode());
         this.questionTree.insertNewQA(this.getCurrentNode(), newQ, yesOrNo, newA);     
     }
 

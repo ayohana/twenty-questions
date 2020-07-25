@@ -23,31 +23,19 @@ $(document).ready(function() {
 
         // Display the first question from root node
         displayNextQuestion();
-
-        // Returns true if a condition of the end of a round is met, otherwise returns false
-        // function isGameOver() {
-        //     // The round is over when we have reached 20 questions or when we are currently on a leaf node
-        //     if (game.getQuestionsCounter() > 20 || game.currentNodeIsLeafNode()) {
-        //         game.resetQuestionsCounter();
-        //         return true;
-        //     }
-        //     return false;
-        // }
-     
-
     });
 
     // Clicking yes/no will display the next question
     // If there is no next question, display the winner
     $("#yesBtn").click(function() {
-        displayNextQuestion(YES)
+        displayNextQuestion(YES);
         if (game.getIsLastQuestion()) {
             displayWinner(YES);   
         }        
     });
 
     $("#noBtn").click(function() {
-        displayNextQuestion(NO)
+        displayNextQuestion(NO);
         if (game.getIsLastQuestion()) {
             displayWinner(NO);   
         } 
@@ -68,6 +56,7 @@ $(document).ready(function() {
     }
 
     // Displays winner and scoreboard
+    // TODO FIX: startNextRoundBtn shows itself after clicking "Yes" 4x
     function displayWinner(yesOrNo) {                        
         if (game.isComputerWinner(yesOrNo)) {
             $("#textOutput").html("Hooray, I win!");
@@ -94,7 +83,7 @@ $(document).ready(function() {
     }
 
     let yesOrNo, newQuestion, newAnswer;
-
+    // TODO: Clear form fields after submission, make them required too?
     $("form#newAnswer").submit(function(event) {
         event.preventDefault();
         newAnswer = $("#fieldNewAnswer").val();
@@ -109,8 +98,6 @@ $(document).ready(function() {
         $("form#yesOrNo").slideDown(500);
     });
 
-    // TODO: Check if Tree is updated correctly!
-    // TODO: Form should pass in the correct input as params when setting new nodes
     $("form#yesOrNo").submit(function(event) {
         event.preventDefault();
         yesOrNo = $("#fieldYesOrNo").val();
@@ -119,6 +106,8 @@ $(document).ready(function() {
         $("#textOutput").html("New object is saved. Challenge me again!");
         $("form#yesOrNo").hide();
         $("#startNextRoundBtn").slideDown(500);
+
+        // Resetting these values after submission prevents errors
         yesOrNo = "";
         newQuestion = "";
         newAnswer = "";
