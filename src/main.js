@@ -18,6 +18,9 @@ $(document).ready(function() {
         $("#startNextRoundBtn").hide();
         $("#inputDiv").hide();
 
+        // Resets current node at the start of a new round
+        game.resetCurrentNode();
+
         // Display the first question from root node
         displayNextQuestion();
 
@@ -53,7 +56,7 @@ $(document).ready(function() {
     
     // If there is a next node, display its text
     // Otherwise, return null
-    // TODO: After winning, currentNode should revert back to root!
+    // TODO: Questions counter should increment correctly!
     function displayNextQuestion(yesOrNo) {                
         let text = game.getNextQuestion(yesOrNo);
         if (!text) {
@@ -107,6 +110,7 @@ $(document).ready(function() {
     });
 
     // TODO: Check if Tree is updated correctly!
+    // TODO: Form should pass in the correct input as params when setting new nodes
     $("form#yesOrNo").submit(function(event) {
         event.preventDefault();
         yesOrNo = $("#fieldYesOrNo").val();
@@ -115,6 +119,9 @@ $(document).ready(function() {
         $("#textOutput").html("New object is saved. Challenge me again!");
         $("form#yesOrNo").hide();
         $("#startNextRoundBtn").slideDown(500);
+        yesOrNo = "";
+        newQuestion = "";
+        newAnswer = "";
     });
 
 });
