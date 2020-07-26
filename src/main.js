@@ -65,6 +65,7 @@ $(document).ready(function() {
             $("#textOutput").html("Drat, I lost.");
             displayForm();
         }
+        game.resetQuestionsCounter();
         displayScores();
     }
 
@@ -82,13 +83,16 @@ $(document).ready(function() {
         $("form#yesOrNo").hide();
     }
 
-    let yesOrNo, newQuestion, newAnswer;
-    // TODO: Clear form fields after submission, make them required too?
+    let yesOrNo, newQuestion, newAnswer, prevAnswer;
+    
     $("form#newAnswer").submit(function(event) {
         event.preventDefault();
         newAnswer = $("#fieldNewAnswer").val();
+        prevAnswer = game.getCurrentNodeAnswer();
         $("form#newAnswer").hide();
         $("form#newQuestion").slideDown(500);
+        $(".userNewAnswer").html(`"${newAnswer}"`);
+        $(".currentNodeAnswer").html(`"${prevAnswer}"`);
     });
 
     $("form#newQuestion").submit(function(event) {
@@ -111,6 +115,11 @@ $(document).ready(function() {
         yesOrNo = "";
         newQuestion = "";
         newAnswer = "";
+
+        // Resets form fields after submission
+        document.getElementById("newAnswer").reset();
+        document.getElementById("newQuestion").reset();
+        document.getElementById("yesOrNo").reset();
     });
 
 });

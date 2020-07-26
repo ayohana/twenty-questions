@@ -23,21 +23,21 @@
         <form id="newAnswer" class="ui form">
           <div class="field">
             <label>What was your object?</label>
-            <input id="fieldNewAnswer" type="text" name="newAnswer" placeholder="sloth">
+            <input id="fieldNewAnswer" type="text" name="newAnswer" placeholder="sloth" required>
           </div>
           <button class="ui button" type="submit">Submit</button>
         </form>
         <form id="newQuestion" class="ui form">
           <div class="field">
-            <label>Type a Y/N question to distinguish your object from computer:</label>
-            <input id="fieldNewQuestion" type="text" name="newQuestion" placeholder="Does it move slowly?">
+            <label>Type a yes/no question to distinguish <span class="userNewAnswer"></span> from <span class="currentNodeAnswer"></span>:</label>
+            <input id="fieldNewQuestion" type="text" name="newQuestion" placeholder="Does it move slowly?" required>
           </div>
           <button class="ui button" type="submit">Submit</button>
         </form>
         <form id="yesOrNo" class="ui form">
           <div class="field">
-            <label>And what is the answer for your object?</label>
-            <input id="fieldYesOrNo" type="text" name="yesOrNo" placeholder="Yes">
+            <label>And what is the answer for <span class="userNewAnswer"></span>? (Y/N)</label>
+            <input id="fieldYesOrNo" type="text" name="yesOrNo" placeholder="Yes" required>
           </div>
           <button class="ui button" type="submit">Submit</button>
         </form>

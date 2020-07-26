@@ -39,10 +39,15 @@ export class Game {
             if (currentNode.question) {                
                 return currentNode.question;
             } else if (currentNode.answer) {
-                this.resetQuestionsCounter();
                 return `Are you thinking of: ${currentNode.answer}?`;
             }
         }
+        return null;
+    }
+
+    getCurrentNodeAnswer() {
+        let currentNode = this.getCurrentNode();
+        if (currentNode.answer) return currentNode.answer;
         return null;
     }
 
