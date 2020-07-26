@@ -22,59 +22,75 @@
         </a>
       </div>         
     </div>
-    <div class="ui horizontal divider">TWENTY QUESTIONS</div> 
-
-    <div id="startBtn" class="ui animated button" tabindex="0">
-      <div class="visible content">New Game</div>
-      <div class="hidden content">Start!</div>
-    </div>
+    <div class="ui horizontal divider">TWENTY QUESTIONS</div>
 
     <br>
 
-    <div id="gameDiv">
-      <h3 id="textOutput" class="ui header">My output text goes here.</h3>
+    <div id="gameContainer" class="ui center aligned raised very padded text piled segment">
 
-      <div id="inputDiv">
-        <form id="newAnswer" class="ui form">
-          <div class="field">
-            <label>What was your object?</label>
-            <input id="fieldNewAnswer" type="text" name="newAnswer" placeholder="sloth" required>
+      <div id="welcomeContainer">
+        <div>
+          <h1 class="ui dividing header">Welcome to Twenty Questions!</h1>
+          <div class="sub header">
+            <p>Think of an object, and I will guess it using a series of yes-or-no questions.</p>
+            <p>Heads up - I can also learn and grow smarter over time!</p>
+            <p>Ready to challenge me?</p>
           </div>
-          <button class="ui button" type="submit">Submit</button>
-        </form>
-        <form id="newQuestion" class="ui form">
-          <div class="field">
-            <label>Type a yes/no question to distinguish <span class="userNewAnswer"></span> from <span class="currentNodeAnswer"></span>:</label>
-            <input id="fieldNewQuestion" type="text" name="newQuestion" placeholder="Does it move slowly?" required>
-          </div>
-          <button class="ui button" type="submit">Submit</button>
-        </form>
-        <form id="yesOrNo" class="ui form">
-          <div class="field">
-            <label>And what is the answer for <span class="userNewAnswer"></span>? (Y/N)</label>
-            <input id="fieldYesOrNo" type="text" name="yesOrNo" placeholder="Yes" required>
-          </div>
-          <button class="ui button" type="submit">Submit</button>
-        </form>
-      </div>
-
-      <div id="pointsDiv">
-        <p>Your score: <span id="playerScore">0</span></p>
-        <p>My score: <span id="computerScore">0</span></p>
-      </div>
-      <br>
-
-      <div id="yesOrNoButtons" class="ui buttons">
-        <button id="yesBtn" class="ui button">Yes</button>
-        <div class="or"></div>
-        <button id="noBtn" class="ui positive button">No</button>
-      </div>
-
-      <div id="startNextRoundBtn">
-        <div class="ui animated button" tabindex="0">
-          <div class="visible content">Next Round</div>
+        </div>
+        <div id="startBtn" class="ui animated teal button" tabindex="0">
+          <div class="visible content">New Game</div>
           <div class="hidden content">Start!</div>
         </div>
+      </div>
+
+      <br>
+
+      <div id="gameDiv">
+        <h3 id="textOutput" class="ui header">My output text goes here.</h3>
+
+        <div id="inputDiv">
+          <form id="newAnswer" class="ui form">
+            <div class="field">
+              <label>What was your object?</label>
+              <input id="fieldNewAnswer" type="text" name="newAnswer" placeholder="sloth" required>
+            </div>
+            <button class="ui brown button" type="submit">Submit</button>
+          </form>
+          <form id="newQuestion" class="ui form">
+            <div class="field">
+              <label>Type a yes/no question to distinguish <span class="userNewAnswer"></span> from <span class="currentNodeAnswer"></span>:</label>
+              <input id="fieldNewQuestion" type="text" name="newQuestion" placeholder="Does it move slowly?" required>
+            </div>
+            <button class="ui brown button" type="submit">Submit</button>
+          </form>
+          <form id="yesOrNo" class="ui form">
+            <div class="field">
+              <label>And what is the answer for <span class="userNewAnswer"></span>? (Y/N)</label>
+              <input id="fieldYesOrNo" type="text" name="yesOrNo" placeholder="Yes" required>
+            </div>
+            <button class="ui brown button" type="submit">Submit</button>
+          </form>
+        </div>
+
+        <div id="pointsDiv">
+          <p>Your score: <span id="playerScore">0</span></p>
+          <p>My score: <span id="computerScore">0</span></p>
+        </div>
+        <br>
+
+        <div id="yesOrNoButtons" class="ui buttons">
+          <button id="yesBtn" class="ui olive button">Yes</button>
+          <div class="or"></div>
+          <button id="noBtn" class="ui yellow button">No</button>
+        </div>
+
+        <div id="startNextRoundBtn">
+          <div class="ui animated teal button" tabindex="0">
+            <div class="visible content">Next Round</div>
+            <div class="hidden content">Start!</div>
+          </div>
+        </div>
+
       </div>
 
     </div>

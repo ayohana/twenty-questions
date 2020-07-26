@@ -13,11 +13,9 @@ $(document).ready(function() {
 
     // Clicking the start new game/start next round button will trigger the following chain of events
     $("#startBtn, #startNextRoundBtn").click(function() {
-        $("#startBtn").hide();
+        $("#startBtn, #welcomeContainer, #inputDiv, #startNextRoundBtn").hide();
         $("#gameDiv").slideDown(500);
         $("#yesOrNoButtons").slideDown(500);
-        $("#inputDiv").hide();
-        $("#startNextRoundBtn").hide();
 
         // Resets current node at the start of a new round
         game.resetCurrentNode();
@@ -107,7 +105,7 @@ $(document).ready(function() {
         yesOrNo = $("#fieldYesOrNo").val();
         game.setNewNodes(newQuestion, yesOrNo, newAnswer);
         console.log("Tree's root", game.questionTree.root);
-        $("#textOutput").html("New object is saved. Challenge me again!");
+        $("#textOutput").html(`"${newAnswer}" is saved. Challenge me again!`);
         $("form#yesOrNo").hide();
         $("#startNextRoundBtn").slideDown(500);
 
