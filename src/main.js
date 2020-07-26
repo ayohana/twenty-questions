@@ -9,14 +9,15 @@ $(document).ready(function() {
     const NO = "No";
 
     $("#gameDiv").hide();
+    $("#startNextRoundBtn").hide();
 
     // Clicking the start new game/start next round button will trigger the following chain of events
     $("#startBtn, #startNextRoundBtn").click(function() {
         $("#startBtn").hide();
         $("#gameDiv").slideDown(500);
         $("#yesOrNoButtons").slideDown(500);
-        $("#startNextRoundBtn").hide();
         $("#inputDiv").hide();
+        $("#startNextRoundBtn").hide();
 
         // Resets current node at the start of a new round
         game.resetCurrentNode();
@@ -56,7 +57,6 @@ $(document).ready(function() {
     }
 
     // Displays winner and scoreboard
-    // TODO FIX: startNextRoundBtn shows itself after clicking "Yes" 4x
     function displayWinner(yesOrNo) {                        
         if (game.isComputerWinner(yesOrNo)) {
             $("#textOutput").html("Hooray, I win!");
