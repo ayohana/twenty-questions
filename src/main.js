@@ -12,17 +12,19 @@ $(document).ready(function() {
     $("#startNextRoundBtn").hide();
 
     // Clicking the start new game/start next round button will trigger the following chain of events
+    // TODO: if cookie exists, warn user if they want to overwrite their last save
     $("#startBtn, #startNextRoundBtn").click(function() {
-        $("#startBtn, #welcomeContainer, #inputDiv, #startNextRoundBtn").hide();
-        $("#gameDiv").slideDown(500);
-        $("#yesOrNoButtons").slideDown(500);
-        $("#pointsDiv").hide();
+        startGame();
+    });
 
-        // Resets current node at the start of a new round
-        game.resetCurrentNode();
-
-        // Display the first question from root node
-        displayNextQuestion();
+    $("#continueBtn").click(function() {
+        if (!cookieExists()) {
+            alert("No save detected. Enable your cookies and start a new game to create a new save!");
+        } else {
+            game = getCookie();
+            console.log(game);
+            startGame();
+        }
     });
 
     // Clicking yes/no will display the next question
@@ -40,6 +42,18 @@ $(document).ready(function() {
             displayWinner(NO);   
         } 
     });
+
+    function startGame() {
+        $("#startBtn, #welcomeContainer, #inputDiv, #startNextRoundBtn, #pointsDiv, #continueBtn").hide();
+        $("#gameDiv").slideDown(500);
+        $("#yesOrNoButtons").slideDown(500);
+
+        // Resets current node at the start of a new round
+        game.resetCurrentNode();
+
+        // Display the first question from root node
+        displayNextQuestion();
+    }
 
     
     // If there is a next node, display its text
@@ -119,6 +133,34 @@ $(document).ready(function() {
         document.getElementById("newAnswer").reset();
         document.getElementById("newQuestion").reset();
         document.getElementById("yesOrNo").reset();
+
+        // After completing the forms, save the game
+        setCookie(game.questionTree.root);
     });
+
+    function setCookie(cvalue) {
+        // let rootObject = JSON.parse(cvalue);
+        let rootObject = JSON.stringify(cvalue);
+
+        // Set cookie to expire in 7 days
+        let date = new Date();
+        date.setTime(date.getTime() + (7*24*60*60*1000));
+        let expires = `expires=${date.toUTCString()}`;     
+        document.cookie = `game=${rootObject};${expires};path=/`;
+    }
+
+    function getCookie() {
+        let decodedCookieArr = document.cookie.split(";");
+        let cookieValue = decodedCookieArr.find(row => row.startsWith("game")).split("=")[1];
+        return JSON.parse(cookieValue);       
+    }
+
+    function cookieExists() {
+        if (document.cookie) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 });
