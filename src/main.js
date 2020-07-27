@@ -21,8 +21,7 @@ $(document).ready(function() {
         if (!cookieExists()) {
             alert("No save detected. Enable your cookies and start a new game to create a new save!");
         } else {
-            game = getCookie();
-            console.log(game);
+            game = parseCookieToObject();
             startGame();
         }
     });
@@ -74,6 +73,7 @@ $(document).ready(function() {
         if (game.isComputerWinner(yesOrNo)) {
             $("#textOutput").html("Hooray, I win!");
             $("#startNextRoundBtn, #pointsDiv").slideDown(500);
+            setCookie(game);
         } else {
             $("#textOutput").html("Drat, I lost.");
             displayForm();
@@ -135,24 +135,37 @@ $(document).ready(function() {
         document.getElementById("yesOrNo").reset();
 
         // After completing the forms, save the game
-        setCookie(game.questionTree.root);
+        setCookie(game);
     });
 
     function setCookie(cvalue) {
         // let rootObject = JSON.parse(cvalue);
-        let rootObject = JSON.stringify(cvalue);
+        let gameObject = JSON.stringify(cvalue);
 
         // Set cookie to expire in 7 days
         let date = new Date();
         date.setTime(date.getTime() + (7*24*60*60*1000));
         let expires = `expires=${date.toUTCString()}`;     
-        document.cookie = `game=${rootObject};${expires};path=/`;
+        document.cookie = `game=${gameObject};${expires};path=/`;
     }
 
     function getCookie() {
         let decodedCookieArr = document.cookie.split(";");
         let cookieValue = decodedCookieArr.find(row => row.startsWith("game")).split("=")[1];
-        return JSON.parse(cookieValue);       
+        return JSON.parse(cookieValue);        
+    }
+
+    function parseCookieToObject() {
+        let cookieObject = getCookie();
+        let lastSave = new Game();
+        for (let key in cookieObject) {
+            if (key == "questionTree") {
+                lastSave[key].root = cookieObject[key].root
+            } else {
+                lastSave[key] = cookieObject[key];
+            }
+        }
+        return lastSave;
     }
 
     function cookieExists() {
