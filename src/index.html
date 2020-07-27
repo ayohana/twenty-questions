@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>Twenty Questions</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   </head>
+
   <body>
     <div id="topNavBar" class="ui text menu">
       <div class="header item">
@@ -23,11 +25,8 @@
       </div>         
     </div>
     <div class="ui horizontal divider">TWENTY QUESTIONS</div>
-
     <br>
-
     <div id="gameContainer" class="ui center aligned raised very padded text piled segment">
-
       <div id="welcomeContainer">
         <div id="welcomeMessage">
           <h1 class="ui dividing header">Welcome to Twenty Questions!</h1>
@@ -46,12 +45,9 @@
           <div class="hidden content">Last Save</div>
         </div>
       </div>
-
       <br>
-
       <div id="gameDiv">
         <h3 id="textOutput" class="ui header">My output text goes here.</h3>
-
         <div id="inputDiv">
           <form id="newAnswer" class="ui form">
             <div class="field">
@@ -75,30 +71,24 @@
             <button class="ui brown button" type="submit">Submit</button>
           </form>
         </div>
-
         <div id="pointsDiv">
           <p>Your score: <span id="playerScore">0</span></p>
           <p>My score: <span id="computerScore">0</span></p>
         </div>
-
         <br>
-
         <div id="yesOrNoButtons" class="ui buttons">
           <button id="yesBtn" class="ui olive button">Yes</button>
           <div class="or"></div>
           <button id="noBtn" class="ui yellow button">No</button>
         </div>
-
         <div id="startNextRoundBtn">
           <div class="ui animated teal button" tabindex="0">
             <div class="visible content">Next Round</div>
             <div class="hidden content">Start!</div>
           </div>
         </div>
-
       </div>
-
     </div>
-
   </body>
+  
 </html>

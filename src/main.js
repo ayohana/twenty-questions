@@ -31,13 +31,15 @@ $(document).ready(function() {
     $("#yesBtn").click(function() {
         displayNextQuestion(YES);
         if (game.getIsLastQuestion()) {
+            game.resetQuestionsCounter();
             displayWinner(YES);   
         }        
     });
 
     $("#noBtn").click(function() {
-        displayNextQuestion(NO);
+        displayNextQuestion(NO); 
         if (game.getIsLastQuestion()) {
+            game.resetQuestionsCounter();
             displayWinner(NO);   
         } 
     });
@@ -69,7 +71,8 @@ $(document).ready(function() {
     }
 
     // Displays winner and scoreboard
-    function displayWinner(yesOrNo) {                        
+    // TODO FIX: Computer should not win when program reaches last question but has not reached an answer node
+    function displayWinner(yesOrNo) {                      
         if (game.isComputerWinner(yesOrNo)) {
             $("#textOutput").html("Hooray, I win!");
             $("#startNextRoundBtn, #pointsDiv").slideDown(500);
@@ -78,7 +81,6 @@ $(document).ready(function() {
             $("#textOutput").html("Drat, I lost.");
             displayForm();
         }
-        game.resetQuestionsCounter();
         displayScores();
     }
 
@@ -98,6 +100,7 @@ $(document).ready(function() {
 
     let yesOrNo, newQuestion, newAnswer, prevAnswer;
     
+    // TODO FIX: display .currentNodeAnswer might be null
     $("form#newAnswer").submit(function(event) {
         event.preventDefault();
         newAnswer = $("#fieldNewAnswer").val();

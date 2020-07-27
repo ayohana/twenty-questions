@@ -33,6 +33,8 @@ export class Game {
     getNextQuestion(yesOrNo = null) {
         this.setCurrentNode(yesOrNo);
         this.setQuestionsCounter();
+        // TODO: reset below to > 20 when ready for live production
+        if (this.getQuestionsCounter() > 3) this.setIsLastQuestionTrue();
 
         let currentNode = this.getCurrentNode();
         if (currentNode) {
@@ -42,13 +44,17 @@ export class Game {
                 return `Are you thinking of: ${currentNode.answer}?`;
             }
         }
+
         return null;
     }
 
     getCurrentNodeAnswer() {
         let currentNode = this.getCurrentNode();
-        if (currentNode.answer) return currentNode.answer;
-        return null;
+        if (currentNode.answer) {
+            return currentNode.answer;
+        } else {
+            return null;
+        }
     }
 
     resetQuestionsCounter() {
@@ -73,13 +79,16 @@ export class Game {
         if (!yesOrNo && !this.currentNode) {
             this.currentNode = this.questionTree.root;
         } else if (!this.currentNode.yes && !this.currentNode.no) {
-            // If it's a leaf node, leave the current node be
+            // If it's a leaf node, leave the current node be and set isLastQuestion to true
             this.setIsLastQuestionTrue();
             return;
         } else if (this.isYes(yesOrNo) && this.currentNode) {
             this.currentNode = this.currentNode.yes;
         } else if (!this.isYes(yesOrNo) && this.currentNode) {
             this.currentNode = this.currentNode.no;
+        } else {
+            // By default, leave the current node be
+            return;
         }
     }
 
