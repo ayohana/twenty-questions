@@ -7,9 +7,9 @@ export class QuestionTree {
 
     // Inserts two new nodes correctly into the tree
     insertNewQA(nodeToFind, newQ, yesOrNo, newA) {
+        // Create two new nodes
         let newQuestionNode = new Node(newQ, null);
         let newAnswerNode = new Node(null, newA);
-
         if (this.isYes(yesOrNo)) {
             newQuestionNode.yes = newAnswerNode;
             newQuestionNode.no = nodeToFind;
@@ -20,23 +20,35 @@ export class QuestionTree {
 
         // Check if there is a root
         if (!this.root) return;
-        if (this.root.answer == nodeToFind.answer) {
+        if (this.root == nodeToFind) {
             this.root = newQuestionNode;
             return;
         }
 
-        // Otherwise, traverse the tree, starting from the root
+        // Otherwise, traverse the tree, starting from the root to find the parent of nodeToFind.
         let currentNode = this.root;
-        let childNode;
+        let childBranch;
         function traverse(currentNode) {
             if (!currentNode.yes && !currentNode.no) return;
+
+            // If inserting in the middle of the tree (currentNode might not be a leaf node and might have children of its own), then pop off the branch based on user input (yes/no button).
             if (currentNode.yes == nodeToFind) {
-                childNode = currentNode.yes;                
+                childBranch = currentNode.yes;                
                 currentNode.yes = newQuestionNode;
+                if (!currentNode.yes.yes) {
+                    currentNode.yes.yes = childBranch;
+                } else {
+                    currentNode.yes.no = childBranch;
+                }
                 return;
             } else if (currentNode.no == nodeToFind) {
-                childNode = currentNode.no;                
+                childBranch = currentNode.no;                
                 currentNode.no = newQuestionNode;
+                if (!currentNode.yes.yes) {
+                    currentNode.yes.yes = childBranch;
+                } else {
+                    currentNode.yes.no = childBranch;
+                }
                 return;
             }            
             if (currentNode.yes) traverse(currentNode.yes);
