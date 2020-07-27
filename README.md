@@ -2,7 +2,7 @@
 
 # [Twenty Questions](https://github.com/ayohana/twenty-questions.git)
 
-#### Binary Trees Exercise in JavaScript, 07.22.2020 - 07.24.2020
+#### Binary Trees Exercise in JavaScript, 07.22.2020 - 07.27.2020
 
 #### By [**Adela Darmansyah**](https://github.com/ayohana/)
 
@@ -12,7 +12,7 @@
 
 ## About
 
-**A web application that implements a yes/no guessing game called "20 Questions."**  This app aims to apply the developer's knowledge on binary trees into practice.
+**A web application that implements a yes/no guessing game called "20 Questions."** This game is between user versus computer. The user will think of an object, and the computer will try to guess the object. But beware! As the computer fails to guess, it gets smarter. The computer will save previous objects it tried to guess so it knows the next time the object comes up again! This app ultimately aims to apply the developer's knowledge on binary trees into practice.
 
 ## How To Install
 
@@ -33,9 +33,15 @@ No known bugs at this time.
 * Markdown
 * [jQuery](https://jquery.com/)
 * [Semantic UI](https://semantic-ui.com/)
-* [Jest](https://jestjs.io/docs/en/api)
 * [Visual Studio Code](https://code.visualstudio.com/)
 * Linux VM
+* npm
+    * Webpack
+    * [Jest](https://jestjs.io/docs/en/api)
+    * Code Linter
+    * _etc.*_
+
+_*Open `package.json` file to see the complete list of all plugins._
 
 ## Learning Resources
 
@@ -45,6 +51,9 @@ No known bugs at this time.
 * [JavaScript Naming Convention](https://www.robinwieruch.de/javascript-naming-conventions)
 * [Semantic UI CDN](https://stackoverflow.com/questions/30281258/how-to-use-semantic-ui-cdn)
 * ["There is no way to pause a function/loop in JavaScript/jQuery"](https://stackoverflow.com/questions/23754587/wait-for-click-in-loop)
+* [MDN: Document.cookie](https://developer.mozilla.org/en-US/docs/Web/API/document/cookie)
+* [W3Schools: JavaScript Cookies](https://www.w3schools.com/js/js_cookies.asp)
+* [Storing JS objects in cookies](https://www.tutorialspoint.com/How-can-I-store-JavaScript-objects-in-cookies#:~:text=To%20store%20JavaScript%20objects%20in,value%20to%20a%20JSON%20string.)
 
 ## Contact
 
