@@ -9,3 +9,15 @@ body {
     width: 550px;
     margin: 0 auto;
 }
+
+#startBtn {
+    margin-top: 20px;
+}
+
+#welcomeMessage {
+    margin-top: 20px;
+}
+
+#gameDiv {
+    padding-top: 20px;
+}

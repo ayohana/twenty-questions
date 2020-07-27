@@ -16,6 +16,7 @@ $(document).ready(function() {
         $("#startBtn, #welcomeContainer, #inputDiv, #startNextRoundBtn").hide();
         $("#gameDiv").slideDown(500);
         $("#yesOrNoButtons").slideDown(500);
+        $("#pointsDiv").hide();
 
         // Resets current node at the start of a new round
         game.resetCurrentNode();
@@ -58,7 +59,7 @@ $(document).ready(function() {
     function displayWinner(yesOrNo) {                        
         if (game.isComputerWinner(yesOrNo)) {
             $("#textOutput").html("Hooray, I win!");
-            $("#startNextRoundBtn").slideDown(500);
+            $("#startNextRoundBtn, #pointsDiv").slideDown(500);
         } else {
             $("#textOutput").html("Drat, I lost.");
             displayForm();
@@ -107,7 +108,7 @@ $(document).ready(function() {
         console.log("Tree's root", game.questionTree.root);
         $("#textOutput").html(`"${newAnswer}" is saved. Challenge me again!`);
         $("form#yesOrNo").hide();
-        $("#startNextRoundBtn").slideDown(500);
+        $("#startNextRoundBtn, #pointsDiv").slideDown(500);
 
         // Resetting these values after submission prevents errors
         yesOrNo = "";
