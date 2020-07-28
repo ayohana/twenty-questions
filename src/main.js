@@ -29,19 +29,21 @@ $(document).ready(function() {
     // Clicking yes/no will display the next question
     // If there is no next question, display the winner
     $("#yesBtn").click(function() {
-        displayNextQuestion(YES);
         if (game.getIsLastQuestion()) {
             game.resetQuestionsCounter();
             displayWinner(YES);   
-        }        
+        } else {
+            displayNextQuestion(YES);
+        }
     });
 
     $("#noBtn").click(function() {
-        displayNextQuestion(NO); 
         if (game.getIsLastQuestion()) {
             game.resetQuestionsCounter();
             displayWinner(NO);   
-        } 
+        } else {
+            displayNextQuestion(NO); 
+        }
     });
 
     function startGame() {
@@ -71,13 +73,16 @@ $(document).ready(function() {
     }
 
     // Displays winner and scoreboard
-    // TODO FIX: Computer should not win when program reaches last question but has not reached an answer node
-    function displayWinner(yesOrNo) {                      
-        if (game.isComputerWinner(yesOrNo)) {
+    function displayWinner(yesOrNo) { 
+        console.log(game.getQuestionsCounter());                   
+        if (game.currentNodeIsLeafNode() && game.evalFinalAnswer(yesOrNo)) {
             $("#textOutput").html("Hooray, I win!");
             $("#startNextRoundBtn, #pointsDiv").slideDown(500);
-        } else {
+        } else if (game.currentNodeIsLeafNode() && !game.evalFinalAnswer(yesOrNo)) {
             $("#textOutput").html("Drat, I lost.");
+            displayForm();
+        } else {
+            $("#textOutput").html(`Drat, I've asked ${game.getMaxQuestions()} questions.`);
             displayForm();
         }
         setCookie(game);

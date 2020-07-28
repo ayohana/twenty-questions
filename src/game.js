@@ -8,6 +8,8 @@ export class Game {
         this.currentNode = null,
         this.questionsCounter = 0;
         this.isLastQuestion = false;
+        this.maxQuestions = 3;
+        // TODO: reset maxQuestions above to 20 when ready for live production
     }
 
     getPlayerWins() {
@@ -26,6 +28,10 @@ export class Game {
         return this.isLastQuestion;
     }
 
+    getMaxQuestions() {
+        return this.maxQuestions;
+    }
+
     getQuestionsCounter() {
         return this.questionsCounter;
     }
@@ -33,14 +39,15 @@ export class Game {
     getNextQuestion(yesOrNo = null) {
         this.setCurrentNode(yesOrNo);
         this.setQuestionsCounter();
-        // TODO: reset below to > 20 when ready for live production
-        if (this.getQuestionsCounter() > 3) this.setIsLastQuestionTrue();
+
+        if (this.getQuestionsCounter() === this.getMaxQuestions()) this.setIsLastQuestionTrue();
 
         let currentNode = this.getCurrentNode();
         if (currentNode) {
             if (currentNode.question) {                
                 return currentNode.question;
             } else if (currentNode.answer) {
+                this.setIsLastQuestionTrue();
                 return `Are you thinking of: ${currentNode.answer}?`;
             }
         }
@@ -108,7 +115,7 @@ export class Game {
         this.questionTree.insertNewQA(this.getCurrentNode(), newQ, yesOrNo, newA);     
     }
 
-    isComputerWinner(yesOrNo) {
+    evalFinalAnswer(yesOrNo) {
         if (this.isYes(yesOrNo)) {
             this.setCompWinsGame();
             return true;
