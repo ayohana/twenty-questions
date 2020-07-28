@@ -10,11 +10,11 @@ body {
     margin: 0 auto;
 }
 
-#startBtn, #continueBtn {
+#startBtn, #continueBtn, #newSave, #cancelNewSave {
     margin-top: 20px;
 }
 
-#welcomeMessage {
+#welcomeMessage, #confirmMessage {
     margin-top: 20px;
 }
 

@@ -37,6 +37,22 @@
             <p>Ready to challenge me?</p>
           </div>
         </div>
+        <div id="confirmMessage">
+          <h1 class="ui dividing header">Are you sure?</h1>
+          <div class="sub header">
+            <p>Your last save was on <span id="lastSaveDateTime">DateTime goes here</span>.</p>
+            <p>Starting a new game will overwrite your last save.</p>
+            <p>Do you want to continue?</p>
+          </div>
+          <div id="newSave" class="ui animated positive button" tabindex="0">
+            <div class="visible content">Yes, please</div>
+            <div class="hidden content">New Save</div>
+          </div>
+          <div id="cancelNewSave" class="ui animated negative button" tabindex="0">
+            <div class="visible content">Oops, never mind</div>
+            <div class="hidden content">Back to Menu</div>
+          </div>
+        </div>
         <div id="startBtn" class="ui animated teal button" tabindex="0">
           <div class="visible content">New Game</div>
           <div class="hidden content">Start!</div>

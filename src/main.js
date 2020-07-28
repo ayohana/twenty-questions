@@ -11,12 +11,27 @@ $(document).ready(function() {
     const NO = "No";
 
     $("#gameDiv").hide();
-    $("#startNextRoundBtn").hide();
+    $("#startNextRoundBtn, #confirmMessage").hide();
+
 
     // Clicking the start new game/start next round button will trigger the following chain of events
-    // TODO: if cookie exists, warn user if they want to overwrite their last save
     $("#startBtn, #startNextRoundBtn").click(function() {
-        // startGame();
+        if (!cookieExists()) {
+            startGame();
+        } else {
+            $("#lastSaveDateTime").html(getLastDateSaved());
+            $("#confirmMessage").show();
+            $("#welcomeMessage, #startBtn, #continueBtn").hide();
+        }
+    });
+
+    $("#newSave").click(function() {
+        startGame();
+    });
+
+    $("#cancelNewSave").click(function() {
+        $("#confirmMessage").hide();
+        $("#welcomeMessage, #startBtn, #continueBtn").show();
     });
 
     $("#continueBtn").click(function() {
@@ -74,8 +89,7 @@ $(document).ready(function() {
     }
 
     // Displays winner and scoreboard
-    function displayWinner(yesOrNo) { 
-        console.log(game.getQuestionsCounter());                   
+    function displayWinner(yesOrNo) {                  
         if (game.currentNodeIsLeafNode() && game.evalFinalAnswer(yesOrNo)) {
             $("#textOutput").html("Hooray, I win!");
             $("#startNextRoundBtn, #pointsDiv").slideDown(500);
@@ -159,17 +173,27 @@ $(document).ready(function() {
         let date = new Date();
         date.setTime(date.getTime() + (7*24*60*60*1000));
         let expires = `expires=${date.toUTCString()}`;     
-        document.cookie = `game=${gameObject};${expires};path=/`;
+        document.cookie = `game=${gameObject}`;
+        document.cookie = `datesaved=${date}`;
+        document.cookie = `${expires}`;
+        document.cookie = `path=/`;
     }
 
-    function getCookie() {
-        let decodedCookieArr = document.cookie.split(";");
+    function getLastDateSaved() {
+        let decodedCookieArr = document.cookie.split("; ");
+        let cookieValue = decodedCookieArr.find(row => row.startsWith("datesaved")).split("=")[1];
+        let dateSaved = new Date(cookieValue);
+        return `${dateSaved.toLocaleDateString()} at ${dateSaved.toLocaleTimeString()}`;        
+    }
+
+    function getLastGame() {
+        let decodedCookieArr = document.cookie.split("; ");
         let cookieValue = decodedCookieArr.find(row => row.startsWith("game")).split("=")[1];
         return JSON.parse(cookieValue);        
     }
 
     function parseCookieToObject() {
-        let cookieObject = getCookie();
+        let cookieObject = getLastGame();
         let lastSave = new Game();
         for (let key in cookieObject) {
             if (key == "questionTree") {
