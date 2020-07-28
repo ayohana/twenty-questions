@@ -85,7 +85,7 @@ describe("GAME", () => {
 
             expectedResultGame.questionTree.root = new Node(newQ, null);
             expectedResultGame.questionTree.root.yes = new Node(null, newA);
-            expectedResultGame.questionTree.root.no = new Node(null, "computer");
+            expectedResultGame.questionTree.root.no = new Node(null, "Computer");
 
             expect(testGame.questionTree.root).toEqual(expectedResultGame.questionTree.root);
         });
@@ -168,7 +168,7 @@ describe("GAME", () => {
 
             expectedResultGame.questionTree.root.no = new Node(newQ, null);
             expectedResultGame.questionTree.root.no.no = new Node(null, newA);
-            expectedResultGame.questionTree.root.no.yes = new Node(null, "computer");
+            expectedResultGame.questionTree.root.no.yes = new Node(null, "Computer");
 
             expect(testGame.questionTree.root).toEqual(expectedResultGame.questionTree.root);
         });

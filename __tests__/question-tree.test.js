@@ -23,8 +23,8 @@ describe("QUESTION TREE", () => {
         expect(qTree.root.question).toBeNull();
     });
 
-    test("New QuestionTree instance should store 'computer' as its root's answer value", () => {
-        expect(qTree.root.answer).toEqual("computer");
+    test("New QuestionTree instance should store 'Computer' as its root's answer value", () => {
+        expect(qTree.root.answer).toEqual("Computer");
     });
 
     
@@ -40,7 +40,7 @@ describe("QUESTION TREE", () => {
 
             expectedResult.root = new Node(newQ, null);
             expectedResult.root.yes = new Node(null, newA);
-            expectedResult.root.no = new Node(null, "computer");
+            expectedResult.root.no = new Node(null, "Computer");
             
             expect(qTree.root).toEqual(expectedResult.root);
         });
@@ -79,7 +79,7 @@ describe("QUESTION TREE", () => {
 
             expectedResult.root.no = new Node(newQ, null);
             expectedResult.root.no.no = new Node(null, newA);
-            expectedResult.root.no.yes = new Node(null, "computer");
+            expectedResult.root.no.yes = new Node(null, "Computer");
 
             expect(qTree).toEqual(expectedResult);
         });
@@ -111,7 +111,7 @@ describe("QUESTION TREE", () => {
         });
     
         test("When pop method is used on a tree that only consists a root node, it should return the root and leave the root property as null", () => {
-            let expectedResult = new Node(null, "computer");
+            let expectedResult = new Node(null, "Computer");
     
             expect(testTree.pop(testTree.root)).toEqual(expectedResult);
             expect(testTree.root).toBeNull();
@@ -120,7 +120,7 @@ describe("QUESTION TREE", () => {
         test("When the tree is empty, the pop method should return null", () => {
             testTree.pop(testTree.root);
     
-            let nodeToPop = new Node(null, "computer");
+            let nodeToPop = new Node(null, "Computer");
     
             expect(testTree.pop(nodeToPop)).toBeNull();
         });
@@ -132,7 +132,7 @@ describe("QUESTION TREE", () => {
         test("Given a nodeToPop object as a parameter, the pop method should return the nodeToPop object", () => {
             testTree.root = new Node("Is it an animal?", null);
             testTree.root.yes = new Node(null, "kangaroo");
-            testTree.root.no = new Node(null, "computer");
+            testTree.root.no = new Node(null, "Computer");
             let nodeToPop = testTree.root.yes;
     
             let expectedResult = new Node(null, "kangaroo");
@@ -142,7 +142,7 @@ describe("QUESTION TREE", () => {
         test("Popping a node out should modify the tree correctly", () => {
             testTree.root = new Node("Is it an animal?", null);
             testTree.root.yes = new Node("Does it move slowly?", null);
-            testTree.root.no = new Node(null, "computer");
+            testTree.root.no = new Node(null, "Computer");
             testTree.root.yes.yes = new Node(null, "sloth");
             testTree.root.yes.no = new Node(null, "kangaroo");
             let nodeToPop = testTree.root.yes.no;
@@ -151,7 +151,7 @@ describe("QUESTION TREE", () => {
             let expectedTree = new QuestionTree();
             expectedTree.root = new Node("Is it an animal?", null);
             expectedTree.root.yes = new Node("Does it move slowly?", null);
-            expectedTree.root.no = new Node(null, "computer");
+            expectedTree.root.no = new Node(null, "Computer");
             expectedTree.root.yes.yes = new Node(null, "sloth");
             expectedTree.root.yes.no = null;
             
