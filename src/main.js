@@ -192,7 +192,7 @@ $(document).ready(function() {
         let lastSave = new Game();
         for (let key in cookieObject) {
             if (key == "questionTree") {
-                lastSave[key].root = cookieObject[key].root
+                lastSave[key].root = cookieObject[key].root;
             } else {
                 lastSave[key] = cookieObject[key];
             }
