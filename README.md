@@ -2,7 +2,7 @@
 
 # [Twenty Questions](https://github.com/ayohana/twenty-questions.git)
 
-#### Binary Trees Exercise in JavaScript, 07.22.2020 - 07.27.2020
+#### Binary Trees Exercise in JavaScript, 07.22.2020 - 07.28.2020
 
 #### By [**Adela Darmansyah**](https://github.com/ayohana/)
 
@@ -13,6 +13,14 @@
 ## About
 
 **A web application that implements a yes/no guessing game called "20 Questions."** This game is between user versus computer. The user will think of an object, and the computer will try to guess the object. But beware! As the computer fails to guess, it gets smarter. The computer will save previous objects it tried to guess so it knows the next time the object comes up again! This app ultimately aims to apply the developer's knowledge on binary trees into practice.
+
+## Winning Conditions
+
+* As the smart computer, I should be able to win the game based on these conditions:
+    * The user reaches the last question (a leaf node), then the user clicks "yes" (right answer).
+* As the user, I should be able to win the game based on these conditions:
+    * I reach the last question (a leaf node), but then I click on "no" (wrong answer).
+    * I reach question #20 that is **not** a leaf node, so it doesn't matter what I click on next (computer ran out of chances to ask questions).
 
 ## How To Install
 

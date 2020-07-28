@@ -36,25 +36,11 @@ export class QuestionTree {
                 console.log("curr", currentNode);               
                 childBranch = currentNode.yes;                
                 currentNode.yes = newQuestionNode;
-                // if (!this.isLeafNode(childBranch)) {
-                //     if (!currentNode.yes.yes && currentNode.yes.no) {
-                //         currentNode.yes.yes = childBranch;
-                //     } else {
-                //         currentNode.yes.no = childBranch;
-                //     }
-                // }
                 return;
             } else if (currentNode.no == nodeToFind) {
                 console.log("curr", currentNode);       
                 childBranch = currentNode.no;                
                 currentNode.no = newQuestionNode;
-                // if (!this.isLeafNode(childBranch)) {
-                //     if (!currentNode.no.yes && currentNode.no.no) {
-                //         currentNode.no.yes = childBranch;
-                //     } else {
-                //         currentNode.no.no = childBranch;
-                //     }
-                // }
                 return;
             }            
             if (currentNode.yes) traverse(currentNode.yes);
@@ -62,15 +48,6 @@ export class QuestionTree {
         }
         traverse(currentNode);
     }
-
-    // isLeafNode(nodeToCheck) {
-    //     if (!this.nodeToCheck) return false;
-    //     if (!this.nodeToCheck.yes && !this.nodeToCheck.no) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     // Assume node will always be a leaf
     // Returns node to be removed and modifies the tree

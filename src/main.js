@@ -61,7 +61,6 @@ $(document).ready(function() {
     
     // If there is a next node, display its text
     // Otherwise, return null
-    // TODO: Questions counter should increment correctly!
     function displayNextQuestion(yesOrNo) {                
         let text = game.getNextQuestion(yesOrNo);
         if (!text) {
@@ -105,7 +104,6 @@ $(document).ready(function() {
 
     let yesOrNo, newQuestion, newAnswer, prevAnswer;
     
-    // TODO FIX: display .currentNodeAnswer might be null
     $("form#newAnswer").submit(function(event) {
         event.preventDefault();
         newAnswer = $("#fieldNewAnswer").val();
@@ -173,7 +171,6 @@ $(document).ready(function() {
         let lastSave = new Game();
         for (let key in cookieObject) {
             if (key == "questionTree") {
-                // ?TODO: Traverse the tree to create node objects - might fix the uncaught exception error
                 lastSave[key].root = cookieObject[key].root
             } else {
                 lastSave[key] = cookieObject[key];
