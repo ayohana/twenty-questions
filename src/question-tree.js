@@ -32,13 +32,11 @@ export class QuestionTree {
             if (!currentNode.yes && !currentNode.no) return;
 
             // If inserting in the middle of the tree (currentNode might not be a leaf node and might have children of its own), then pop off the branch based on user input (yes/no button).
-            if (currentNode.yes == nodeToFind) {
-                console.log("curr", currentNode);               
+            if (currentNode.yes == nodeToFind) {        
                 childBranch = currentNode.yes;                
                 currentNode.yes = newQuestionNode;
                 return;
-            } else if (currentNode.no == nodeToFind) {
-                console.log("curr", currentNode);       
+            } else if (currentNode.no == nodeToFind) {     
                 childBranch = currentNode.no;                
                 currentNode.no = newQuestionNode;
                 return;

@@ -2,8 +2,6 @@ import './styles.css' ;
 import $ from 'jquery';
 import { Game } from '../src/game';
 
-// TODO: Remove console.logs!
-
 $(document).ready(function() {
 
     let game = new Game();
@@ -13,9 +11,7 @@ $(document).ready(function() {
     $("#gameDiv").hide();
     $("#startNextRoundBtn, #confirmMessage").hide();
 
-
-    // Clicking the start new game/start next round button will trigger the following chain of events
-    $("#startBtn, #startNextRoundBtn").click(function() {
+    $("#startBtn").click(function() {
         if (!cookieExists()) {
             startGame();
         } else {
@@ -25,11 +21,11 @@ $(document).ready(function() {
         }
     });
 
-    $("#newSave").click(function() {
+    $("#newSaveBtn, #startNextRoundBtn").click(function() {
         startGame();
     });
 
-    $("#cancelNewSave").click(function() {
+    $("#cancelNewSaveBtn").click(function() {
         $("#confirmMessage").hide();
         $("#welcomeMessage, #startBtn, #continueBtn").show();
     });
@@ -65,8 +61,7 @@ $(document).ready(function() {
 
     function startGame() {
         $("#startBtn, #welcomeContainer, #inputDiv, #startNextRoundBtn, #pointsDiv, #continueBtn").hide();
-        $("#gameDiv").slideDown(500);
-        $("#yesOrNoButtons").slideDown(500);
+        $("#gameDiv, #yesOrNoButtons").slideDown(500);
 
         // Resets current node at the start of a new round
         game.resetCurrentNode();
@@ -83,20 +78,21 @@ $(document).ready(function() {
         if (!text) {
             return null;
         }
-        $("#textOutput").html(`Q#${game.getQuestionsCounter()} ${text}`);                        
-        console.log("round #", game.getQuestionsCounter());
-        console.log("currentNode", game.getCurrentNode());
+        $("#textOutput").html(`Q#${game.getQuestionsCounter()} ${text}`);      
     }
 
-    // Displays winner and scoreboard
+    // Displays winner and scoreboard, then save the game
     function displayWinner(yesOrNo) {                  
         if (game.currentNodeIsLeafNode() && game.evalFinalAnswer(yesOrNo)) {
+            game.setCompWinsGame();
             $("#textOutput").html("Hooray, I win!");
             $("#startNextRoundBtn, #pointsDiv").slideDown(500);
         } else if (game.currentNodeIsLeafNode() && !game.evalFinalAnswer(yesOrNo)) {
+            game.setPlayerWinsGame();
             $("#textOutput").html("Drat, I lost.");
             displayForm();
         } else {
+            game.setPlayerWinsGame();
             $("#textOutput").html(`Drat, I've asked ${game.getMaxQuestions()} questions.`);
             displayForm();
         }
@@ -146,7 +142,7 @@ $(document).ready(function() {
         event.preventDefault();
         yesOrNo = $("#fieldYesOrNo").val();
         game.setNewNodes(newQuestion, yesOrNo, newAnswer);
-        console.log("Tree's root", game.questionTree.root);
+        
         $("#textOutput").html(`"${newAnswer}" is saved. Challenge me again!`);
         $("form#yesOrNo").hide();
         $("#startNextRoundBtn, #pointsDiv").slideDown(500);
@@ -166,7 +162,6 @@ $(document).ready(function() {
     });
 
     function setCookie(cvalue) {
-        // let rootObject = JSON.parse(cvalue);
         let gameObject = JSON.stringify(cvalue);
 
         // Set cookie to expire in 7 days

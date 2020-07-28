@@ -10,7 +10,7 @@ body {
     margin: 0 auto;
 }
 
-#startBtn, #continueBtn, #newSave, #cancelNewSave {
+#startBtn, #continueBtn, #newSaveBtn, #cancelNewSaveBtn {
     margin-top: 20px;
 }
 

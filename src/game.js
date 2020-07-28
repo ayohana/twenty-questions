@@ -8,8 +8,7 @@ export class Game {
         this.currentNode = null,
         this.questionsCounter = 0;
         this.isLastQuestion = false;
-        this.maxQuestions = 3;
-        // TODO: reset maxQuestions above to 20 when ready for live production
+        this.maxQuestions = 20;
     }
 
     getPlayerWins() {
@@ -117,10 +116,8 @@ export class Game {
 
     evalFinalAnswer(yesOrNo) {
         if (this.isYes(yesOrNo)) {
-            this.setCompWinsGame();
             return true;
         } else {
-            this.setPlayerWinsGame();
             return false;
         }
     }
