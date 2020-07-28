@@ -80,7 +80,7 @@ describe("GAME", () => {
 
         test("Round #1: setNewNodes method should insert two new nodes correctly into the question tree property", () => {
             newQ = "Is it an animal?";
-            newA = "kangaroo"
+            newA = "Kangaroo"
             testGame.setNewNodes(newQ, YES, newA);
 
             expectedResultGame.questionTree.root = new Node(newQ, null);
@@ -90,11 +90,12 @@ describe("GAME", () => {
             expect(testGame.questionTree.root).toEqual(expectedResultGame.questionTree.root);
         });
 
-        test("Round #1: After setting new nodes, currentNode property should be reset to null", () => {
+        test("Round #2: At the start of a new round, currentNode property should be reset to null", () => {
+            testGame.resetCurrentNode();
             expect(testGame.currentNode).toBeNull();
         });
 
-        test("Round #2: Invoke #1: given no params, setCurrentNode method set the currentNode property starting from the root", () => {
+        test("Round #2: Invoke #1: given no params, setCurrentNode method set the currentNode property starting from the root", () => {            
             testGame.setCurrentNode();
             expect(testGame.getCurrentNode()).toEqual(testGame.questionTree.root);
         });
@@ -106,17 +107,18 @@ describe("GAME", () => {
 
         test("Round #2: setNewNodes method should insert two new nodes correctly into the question tree property", () => {
             newQ = "Does it move slowly?";
-            newA = "sloth";
+            newA = "Sloth";
             testGame.setNewNodes(newQ, YES, newA);
 
             expectedResultGame.questionTree.root.yes = new Node(newQ, null);
             expectedResultGame.questionTree.root.yes.yes = new Node(null, newA);
-            expectedResultGame.questionTree.root.yes.no = new Node(null, "kangaroo");
+            expectedResultGame.questionTree.root.yes.no = new Node(null, "Kangaroo");
 
             expect(testGame.questionTree.root).toEqual(expectedResultGame.questionTree.root);
         });
 
-        test("Round #2: Reset the currentNode property when end of game is reached", () => {
+        test("Round #3: At the start of a new round, currentNode property should be reset to null", () => {
+            testGame.resetCurrentNode();
             expect(testGame.getCurrentNode()).toBeNull();
         });
 
@@ -137,17 +139,18 @@ describe("GAME", () => {
 
         test("Round #3: setNewNodes method should insert two new nodes correctly into the question tree property", () => {
             newQ = "Does it jump skillfully?";
-            newA = "cheetah";
+            newA = "Cheetah";
             testGame.setNewNodes(newQ, NO, newA);
 
             expectedResultGame.questionTree.root.yes.no = new Node(newQ, null);
             expectedResultGame.questionTree.root.yes.no.no = new Node(null, newA);
-            expectedResultGame.questionTree.root.yes.no.yes = new Node(null, "kangaroo");
+            expectedResultGame.questionTree.root.yes.no.yes = new Node(null, "Kangaroo");
 
             expect(testGame.questionTree.root).toEqual(expectedResultGame.questionTree.root);
         });
 
-        test("Round #3: Reset the currentNode property when end of game is reached", () => {
+        test("Round #4: At the start of a new round, currentNode property should be reset to null", () => {
+            testGame.resetCurrentNode();
             expect(testGame.getCurrentNode()).toBeNull();
         });
 
@@ -163,7 +166,7 @@ describe("GAME", () => {
 
         test("Round #4: setNewNodes method should insert two new nodes correctly into the question tree property", () => {
             newQ = "Is it an object?";
-            newA = "programmer";
+            newA = "Programmer";
             testGame.setNewNodes(newQ, NO, newA);
 
             expectedResultGame.questionTree.root.no = new Node(newQ, null);
@@ -173,10 +176,5 @@ describe("GAME", () => {
             expect(testGame.questionTree.root).toEqual(expectedResultGame.questionTree.root);
         });
 
-        test("Round #4: Reset the currentNode property when end of game is reached", () => {
-            expect(testGame.getCurrentNode()).toBeNull();
-        });
-
     });
-
 });
