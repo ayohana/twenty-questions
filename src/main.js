@@ -64,8 +64,8 @@ $(document).ready(function() {
         let text = game.getNextQuestion(yesOrNo);
         if (!text) {
             return null;
-        }      
-        $("#textOutput").html(text);                        
+        }
+        $("#textOutput").html(`Q#${game.getQuestionsCounter()} ${text}`);                        
         console.log("round #", game.getQuestionsCounter());
         console.log("currentNode", game.getCurrentNode());
     }
@@ -76,11 +76,11 @@ $(document).ready(function() {
         if (game.isComputerWinner(yesOrNo)) {
             $("#textOutput").html("Hooray, I win!");
             $("#startNextRoundBtn, #pointsDiv").slideDown(500);
-            setCookie(game);
         } else {
             $("#textOutput").html("Drat, I lost.");
             displayForm();
         }
+        setCookie(game);
         displayScores();
     }
 
@@ -105,10 +105,15 @@ $(document).ready(function() {
         event.preventDefault();
         newAnswer = $("#fieldNewAnswer").val();
         prevAnswer = game.getCurrentNodeAnswer();
+        
         $("form#newAnswer").hide();
         $("form#newQuestion").slideDown(500);
         $(".userNewAnswer").html(`"${newAnswer}"`);
-        $(".currentNodeAnswer").html(`"${prevAnswer}"`);
+        if (!prevAnswer) {
+            $(".currentNodeAnswer").html(``);
+        } else {
+            $(".currentNodeAnswer").html(` from "${prevAnswer}"`);
+        }
     });
 
     $("form#newQuestion").submit(function(event) {
@@ -163,6 +168,7 @@ $(document).ready(function() {
         let lastSave = new Game();
         for (let key in cookieObject) {
             if (key == "questionTree") {
+                // ?TODO: Traverse the tree to create node objects - might fix the uncaught exception error
                 lastSave[key].root = cookieObject[key].root
             } else {
                 lastSave[key] = cookieObject[key];

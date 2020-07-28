@@ -28,27 +28,33 @@ export class QuestionTree {
         // Otherwise, traverse the tree, starting from the root to find the parent of nodeToFind.
         let currentNode = this.root;
         let childBranch;
-        function traverse(currentNode) {
+        function traverse(currentNode) {            
             if (!currentNode.yes && !currentNode.no) return;
 
             // If inserting in the middle of the tree (currentNode might not be a leaf node and might have children of its own), then pop off the branch based on user input (yes/no button).
             if (currentNode.yes == nodeToFind) {
+                console.log("curr", currentNode);               
                 childBranch = currentNode.yes;                
                 currentNode.yes = newQuestionNode;
-                if (!currentNode.yes.yes) {
-                    currentNode.yes.yes = childBranch;
-                } else {
-                    currentNode.yes.no = childBranch;
-                }
+                // if (!this.isLeafNode(childBranch)) {
+                //     if (!currentNode.yes.yes && currentNode.yes.no) {
+                //         currentNode.yes.yes = childBranch;
+                //     } else {
+                //         currentNode.yes.no = childBranch;
+                //     }
+                // }
                 return;
             } else if (currentNode.no == nodeToFind) {
+                console.log("curr", currentNode);       
                 childBranch = currentNode.no;                
                 currentNode.no = newQuestionNode;
-                if (!currentNode.yes.yes) {
-                    currentNode.yes.yes = childBranch;
-                } else {
-                    currentNode.yes.no = childBranch;
-                }
+                // if (!this.isLeafNode(childBranch)) {
+                //     if (!currentNode.no.yes && currentNode.no.no) {
+                //         currentNode.no.yes = childBranch;
+                //     } else {
+                //         currentNode.no.no = childBranch;
+                //     }
+                // }
                 return;
             }            
             if (currentNode.yes) traverse(currentNode.yes);
@@ -56,6 +62,15 @@ export class QuestionTree {
         }
         traverse(currentNode);
     }
+
+    // isLeafNode(nodeToCheck) {
+    //     if (!this.nodeToCheck) return false;
+    //     if (!this.nodeToCheck.yes && !this.nodeToCheck.no) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     // Assume node will always be a leaf
     // Returns node to be removed and modifies the tree
