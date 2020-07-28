@@ -2,6 +2,8 @@ import './styles.css' ;
 import $ from 'jquery';
 import { Game } from '../src/game';
 
+// TODO: Remove console.logs!
+
 $(document).ready(function() {
 
     let game = new Game();
@@ -14,7 +16,7 @@ $(document).ready(function() {
     // Clicking the start new game/start next round button will trigger the following chain of events
     // TODO: if cookie exists, warn user if they want to overwrite their last save
     $("#startBtn, #startNextRoundBtn").click(function() {
-        startGame();
+        // startGame();
     });
 
     $("#continueBtn").click(function() {

@@ -6,6 +6,8 @@
 
 #### By [**Adela Darmansyah**](https://github.com/ayohana/)
 
+[About](#About) | [Screenshots](#Screenshots) | [How To Install](#How-To-Install) | [Bugs](#Known-Bugs) | [Technologies Used](#Technologies-Used) | [Learning Resources](#Learning-Resources)  | [Contact and Support](#Contact-and-Support)
+
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ayohana/twenty-questions/master?color=%23DE98B2&style=for-the-badge) ![GitHub language count](https://img.shields.io/github/languages/count/ayohana/twenty-questions?color=%23DE98B2&style=for-the-badge) ![GitHub top language](https://img.shields.io/github/languages/top/ayohana/twenty-questions?color=%23DE98B2&style=for-the-badge)
 
 </div>
@@ -14,13 +16,17 @@
 
 **A web application that implements a yes/no guessing game called "20 Questions."** This game is between user versus computer. The user will think of an object, and the computer will try to guess the object. But beware! As the computer fails to guess, it gets smarter. The computer will save previous objects it tried to guess so it knows the next time the object comes up again! This app ultimately aims to apply the developer's knowledge on binary trees into practice.
 
-## Winning Conditions
+### Winning Conditions
 
 * As the smart computer, I should be able to win the game based on these conditions:
     * The user reaches the last question (a leaf node), then the user clicks "yes" (right answer).
 * As the user, I should be able to win the game based on these conditions:
     * I reach the last question (a leaf node), but then I click on "no" (wrong answer).
     * I reach question #20 that is **not** a leaf node, so it doesn't matter what I click on next (computer ran out of chances to ask questions).
+
+## Screenshots
+
+**_Coming up soon!_**
 
 ## How To Install
 
@@ -62,7 +68,8 @@ _*Open `package.json` file to see the complete list of all plugins._
 * [MDN: Document.cookie](https://developer.mozilla.org/en-US/docs/Web/API/document/cookie)
 * [W3Schools: JavaScript Cookies](https://www.w3schools.com/js/js_cookies.asp)
 * [Storing JS objects in cookies](https://www.tutorialspoint.com/How-can-I-store-JavaScript-objects-in-cookies#:~:text=To%20store%20JavaScript%20objects%20in,value%20to%20a%20JSON%20string.)
+* [Failed npm install semantic-ui in Linux (does not support newer nodes) - still an open GitHub issue](https://github.com/Semantic-Org/Semantic-UI/issues/6920)
 
-## Contact
+## Contact and Support
 
 Any feedback is welcomed! Email: [adela.yohana@gmail.com](mailto:adela.yohana@gmail.com)
