@@ -14,7 +14,7 @@
 
 ## About
 
-**A web application that implements a yes/no guessing game called "20 Questions."** This game is between user versus computer. The user will think of an object, and the computer will try to guess the object. But beware! As the computer fails to guess, it gets smarter. The computer will save previous objects it tried to guess so it knows the next time the object comes up again! This app ultimately aims to apply the developer's knowledge on binary trees into practice.
+**A web application that implements a yes/no guessing game called "20 Questions."** This game is between user versus computer. The user will think of an object, and the computer will try to guess the object. But beware! As the computer fails to guess, it gets smarter. The computer will save previous objects it tried to guess so it knows the next time the object comes up again! This app ultimately aims to apply the developer's knowledge on binary trees into practice. Click on the following link to play around with the deployed app! [Twenty Questions on Netlify](https://twentyquestions.netlify.app/)
 
 ### Winning Conditions
 
@@ -26,9 +26,25 @@
 
 ## Screenshots
 
-**_Coming up soon!_**
+<div align="center">
+
+#### Create new game
+<img src="./src/img/create-new-save.gif" width=600px alt="Create new game">
+
+#### First three rounds of the game
+<img src="./src/img/first-three-rounds.gif" width=600px alt="First three rounds of the game">
+
+#### Reaching question # 20
+<img src="./src/img/over-20-questions.gif" width=600px alt="Reaching question # 20">
+
+#### Cancel create new game
+<img src="./src/img/cancel-create-new-save.gif" width=600px alt="Cancel create new game">
+
+</div>
 
 ## How To Install
+
+### For local development
 
 * Clone this [repo](https://github.com/ayohana/twenty-questions.git)
 * Open the command line and navigate into the repository
@@ -69,6 +85,9 @@ _*Open `package.json` file to see the complete list of all plugins._
 * [W3Schools: JavaScript Cookies](https://www.w3schools.com/js/js_cookies.asp)
 * [Storing JS objects in cookies](https://www.tutorialspoint.com/How-can-I-store-JavaScript-objects-in-cookies#:~:text=To%20store%20JavaScript%20objects%20in,value%20to%20a%20JSON%20string.)
 * [Failed npm install semantic-ui in Linux (does not support newer nodes) - still an open GitHub issue](https://github.com/Semantic-Org/Semantic-UI/issues/6920)
+* [`document.cookie` cannot set two cookies at the same time!](https://stackoverflow.com/questions/24865916/how-to-set-multiple-key-value-pairs-to-one-cookie)
+* [ESLint: Specify exceptions not to check for usage of variables whose names match a regexp pattern](https://eslint.org/docs/rules/no-unused-vars#varsignorepattern)
+* [Step-by-step: How to deploy webpack/npm project using Netlify](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/)
 
 ## Contact and Support
 
