@@ -85,6 +85,7 @@ _*Open `package.json` file to see the complete list of all plugins._
 * [W3Schools: JavaScript Cookies](https://www.w3schools.com/js/js_cookies.asp)
 * [Storing JS objects in cookies](https://www.tutorialspoint.com/How-can-I-store-JavaScript-objects-in-cookies#:~:text=To%20store%20JavaScript%20objects%20in,value%20to%20a%20JSON%20string.)
 * [Failed npm install semantic-ui in Linux (does not support newer nodes) - still an open GitHub issue](https://github.com/Semantic-Org/Semantic-UI/issues/6920)
+* [Cookies vs Caches](https://medium.com/techblogout/whats-the-difference-between-cache-and-cookies-53e7f4f094bb)
 * [`document.cookie` cannot set two cookies at the same time!](https://stackoverflow.com/questions/24865916/how-to-set-multiple-key-value-pairs-to-one-cookie)
 * [ESLint: Specify exceptions not to check for usage of variables whose names match a regexp pattern](https://eslint.org/docs/rules/no-unused-vars#varsignorepattern)
 * [Step-by-step: How to deploy webpack/npm project using Netlify](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/)
