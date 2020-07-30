@@ -37,6 +37,9 @@
 #### Reaching question # 20
 <img src="./src/img/over-20-questions.gif" width=600px alt="Reaching question # 20">
 
+#### No save detected
+<img src="./src/img/no-game-save.gif" width=600px alt="No save detected">
+
 #### Cancel create new game
 <img src="./src/img/cancel-create-new-save.gif" width=600px alt="Cancel create new game">
 
@@ -92,4 +95,6 @@ _*Open `package.json` file to see the complete list of all plugins._
 
 ## Contact and Support
 
-Any feedback is welcomed! Email: [adela.yohana@gmail.com](mailto:adela.yohana@gmail.com)
+Any feedback is welcomed!
+
+[adela.yohana@gmail.com](mailto:adela.yohana@gmail.com)
