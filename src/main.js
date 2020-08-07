@@ -178,7 +178,7 @@ $(document).ready(function() {
         let decodedCookieArr = document.cookie.split("; ");
         let cookieValue = decodedCookieArr.find(row => row.startsWith("datesaved")).split("=")[1];
         let dateSaved = new Date(cookieValue);
-        return `${dateSaved.toLocaleDateString()} at ${dateSaved.toLocaleTimeString()}`;        
+        return `${dateSaved.toDateString()} at ${dateSaved.toLocaleTimeString()}`;        
     }
 
     function getLastGame() {
